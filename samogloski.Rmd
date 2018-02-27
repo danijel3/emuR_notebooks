@@ -105,12 +105,12 @@ library(phonR)
 
 
 Rysowanie używając tej biblioteki jest trywialne:
-```{r}
+```{r,fig.width=10}
 plotVowels(dane$F1,dane$F2,dane$vowel)
 ```
 
 Ale, przy odrobinie czytania dokumentacji i ustawiania argumentów, można uzyskać bardzo ładne rysunki:
-```{r}
+```{r,fig.width=10}
 plotVowels(dane$F1, dane$F2,
            vowel = dane$vowel, 
            var.col.by = dane$vowel, 
