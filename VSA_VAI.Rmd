@@ -1,0 +1,90 @@
+---
+title: "VSA i VAI"
+output: html_notebook
+---
+
+Ten zeszyt opisuje dwie miary opartę o położenia formantów F1/F2 samogłosek mające odzwierciedlenie w praktycznych zastosowaniach opisanych w literaturze: **Vowel Space Area** (VSA), oraz **Vowel Articulation Index** (VAI). Ich opis i zastosowanie można przeczytać na przykład w pracy:
+
+  * Skodda, S., Grönheit, W., & Schlegel, U. (2012). Impairment of Vowel Articulation as a Possible Marker of Disease Progression in Parkinson’s Disease. PLoS ONE, 7(2), e32132. https://doi.org/10.1371/journal.pone.0032132
+
+> The absolute Hz2 values of vowel area obtained through this calculation do not possess functional significance on their own, although they are estimated to serve as an index of the general pattern of change in the working space for vowels [16,17,18]. However, measurement of the triangular or quadrilateral VSA, although well established as the most common acoustic metric in research on disturbed vowel articulation (e.g. [13,19]), has been proven to be insensitive to mild or moderate forms of dysarthria, especially in PD patients [4]. Moreover, in some studies, the VSA accounted for only about 10% of the variance in measures of speech intelligibility [20,21]. Recently, a further surrogate parameter called ‘‘vowel articulation index/VAI’’ (and its reciprocal value, the so called ‘‘formant centralization ratio/FCR’’) had been developed by Sapir and coworkers [15,18] and been proven by empirical testing to be more sensitive in Parkinsonian hypokinetic dysarthria than tVSA in several publications [15,18,22].
+
+Powyżej zacytowano, między innymi dwie następujące prace, które również warto przeczytać:
+
+  * Sapir, S., Ramig, L. O., Spielman, J. L., & Fox, C. (2010). Formant centralization ratio: a proposal for a new acoustic measure of dysarthric speech. Journal of Speech, Language, and Hearing Research : JSLHR, 53(1), 114–125. https://doi.org/10.1044/1092-4388(2009/08-0184)
+  * Roy, N., Nissen, S. L., Dromey, C., & Sapir, S. (n.d.). Articulatory changes in muscle tension dysphonia: Evidence of vowel space expansion following manual circumlaryngeal therapy. https://doi.org/10.1016/j.jcomdis.2008.10.001
+
+Zanim przejdziemy do liczenia tych miar, wczytajmy naszą bazę i formanty. Zgodnie z pracą o chorobie Parkinsona, będziemy się koncentrować na samogłoskach *a*, *i* i *u*:
+```{r}
+library(emuR)
+library(dplyr)
+library(phonR)
+
+db <- load_emuDB('clarin', verbose = FALSE)
+segs <- query(db,'Phoneme=a|i|u')
+td <- get_trackdata(db,seglist = segs, ssffTrackName = 'Formants', cut=0.5,
+                 verbose = FALSE)
+```
+
+Tak jak poprzednio, wszystko co potrzebne przekopiujemy do osobnej tabelki i usuniemy z niej błędne wartości:
+```{r}
+dt <- data.frame(speaker=segs$session,phoneme=segs$labels,F1=td$fm1,F2=td$fm2)
+dt <- filter(dt, F1 > 0 & F2 > 0)
+```
+
+Żeby policzyć **VSA**, musimy policzyć pole wielokąta, którego wierzchołkami są centroidy poszczególnych samogłosek. W tym przypadku analizujemy pole trójkąta (bo mamy 3 samogłoski), ale w literaturze spotykamy różne metody liczenia pola. Dlatego tą metodę nazwano w pracy powyżej *tVSA* (czyli triangular vowel space area).
+
+W pracy wspomniano, że metoda ta jest dosyć popularna i używana w wielu pracach, więc nic dziwnego, że jej ktoś już zaimplementował. W bibilotece *phonR* można znaleźć metodę **vowelMeansPolygonArea**, która wszystko wylicza:
+```{r}
+VSA<-vowelMeansPolygonArea(dt$F1,dt$F2,dt$phoneme,poly.order=c('i','a','u'),group = dt$speaker)
+```
+
+Podajemy do niej po kolei F1 i F2 z bazy, listę samogłosek, kolejność samogłosek do liczenia powierzchni (ma to duże znaczenie jeśli ich ilość jest >3) oraz listę mówców. 
+
+Implementacja tej funkcji jest dosyć prosta:
+```{r}
+vowelMeansPolygonArea
+```
+
+Dane są najpierw sortowane według mówcy (funkcja `by(df,df$g,...)`). Potem są liczone średnie F1 i F2 dla poszczególnych samogłosek (funkcje `tapply(i$f1, i$v, mean)` i to samo dla f2). Na koniec wszystko jest przekazywane do funkcji `areapl` z biblioteki **splancs**. Funkcja ta liczy powierzchnię dowolnego wielokąta używając standardwoej metody, o której można poczytać na Wikipedii:
+https://en.wikipedia.org/wiki/Shoelace_formula
+
+Mankamentem tej funkcji jest to, że żadne odcinki tego wielokąta się nie mogą krzyżować. Dlatego jest bardzo istotna kolejność wierzchołków (samogłosek) w przypadku jeśli ich ilość jest >=4.
+
+Po wyliczeniu możemy narysować wartości VSA dla poszczególnych sesji:
+```{r,fig.width=12}
+barplot(VSA,ylab = expression(Hz^2))
+```
+
+Podczas nagrywania korpusu, czasami ta sama osoba była nagrywana podwójnie. W tym przypadku, sesje 103 i 104 oraz 105 i 106 to te same osoby. Niemniej widać różnice w otrzymanych wartościach.
+
+Żeby policzyć **VAI**, nie mamy niestety istniejącej implementacji w R, więc zrobimy to ręcznie. Miara ta jest stosunkiem dwóch skrajnych wartości położenia formantów (F1 samogłoski *a* i F2 samogłoski *i*) względem wszystkich innych. 
+
+Musimy zatem sami ręcznie najpierw wyliczyć średnie F1 i F2 dla poszczególnych mówców i ich samogłosek:
+```{r}
+da <- dt %>% group_by(speaker,phoneme) %>% summarise_at(vars(F1,F2), funs(mean(.)))
+```
+
+A potem wyciągniemy w funkcji poszczególne wartości i zastosujemy je we wzorze:
+```{r}
+VAI_func <- function(spk) {
+  f1a<-filter(spk,phoneme=='a')$F1
+  f2a<-filter(spk,phoneme=='a')$F2
+  f1i<-filter(spk,phoneme=='i')$F1
+  f2i<-filter(spk,phoneme=='i')$F2
+  f1u<-filter(spk,phoneme=='u')$F1
+  f2u<-filter(spk,phoneme=='u')$F2
+  
+  VAI<-(f1a+f2i)/(f2a+f1i+f1u+f2u)
+}
+VAI=by(da,da$speaker,VAI_func)
+```
+
+Tak jak ostatnio, możemy narysować wykres:
+```{r,fig.width=12}
+barplot(VAI)
+```
+
+Warto zauważyć, że chociaż ogólnie wartości wychodzą podobnie, niektóre wartości, zbliżone w przestzeni VSA, wyszły zupełnie inne dla VAI. W szczególności, mówca sesji 103/104 ma lepsze VAI od mówcy 105/106, inaczej niż w przypadku VSA.
+
+Żeby było jasne, w tym przypadku nie można wyciągnąć żadne wnioski z tego eksperymentu! Na pewno nie można mówić o chorobie Parkinsona i żadnych innych dolegliwościach na podstawie tego kontekstu. Można jednak pomyśleć o innych, bardziej przyziemnych zastosowaniach. Gdybyśmy przykładowo szukali wśród tych osób kogoś do pracy w radiu albo telewizji, prawdopodobnie byśmy preferowali tych o wyższych wartościach VAI/VSA. Jednak nawet w tym przypadku wartości te nie można by stosować bez odniesienia do innych aspektów osobniczych kandydatów.

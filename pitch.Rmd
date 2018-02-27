@@ -1,0 +1,54 @@
+---
+title: "F0 w emuR"
+output: html_notebook
+---
+
+Poprzedni zeszyt pokazał podstawy pracy z biblioteką **emuR**, ale posiada ona o wiele więcej funkcjonalności. Podstawowym celem biblioteki jest żeby zaoszczędzić czas osobom pracującycm z korpusami. Idea pracy z nią polega szybkim testowaniu pomsyłów i hipotez.
+
+Zacznijmy od prawdziwej hipotezy jaką wszyscy znamy: F0 jest zależne od płci. Co musimy zrobić żeby przetestować prawdziwość tego stwierdzenia:
+  
+  1. znaleźć segmenty dla jakiejść reprezentatywnej głoski (np *a*)
+  2. podzielić je według płci
+  3. wyliczyć F0 dla każdego segmentu
+  4. porównać wartości używając jakiegoś sensownego narzędzia
+  
+Zacznijmy zatem po kolei. Wczytajmy bazę i zobaczmy jaką informację posiada:
+
+```{r}
+library(emuR)
+db = load_emuDB('clarin', verbose = FALSE)
+list_levelDefinitions(db)
+```
+
+Według opisu widać, że każda wypowiedź zawiera opis płci mówcy. Nasz problem możemy rozwiązać na kilka sposobów, ale tutaj spróbujemy ten prostszy.
+
+Znajdźmy odpowiednio segmenty należące do mężczyzn i do kobiet i zapiszmy je w osobnych zmiennych:
+```{r}
+seg_F = emuR::query(db,"[Phoneme==a ^ Gender==F]")
+seg_M = emuR::query(db,"[Phoneme==a ^ Gender==M]")
+```
+
+Powyższe polecenie szuka wszystkie wystąpienia fonemu *a* w korpusie 10 osób, ale w taki sposób żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można przeczytać wpisując polecenie:
+```{r}
+vignette('EQL')
+```
+
+Na szczęście, ilość segmentów, zarówno jednych, jak i drugich, jest w miarę podobna, więc będzie można użyć prostych miar statystyczncyh do ich porównania.
+
+Wyliczmy najpierw F0 dla poszczególnych segmetnów:
+```{r}
+td_F = get_trackdata(db, seg_F,"Pitch", cut=0.5, verbose = FALSE)
+td_M = get_trackdata(db, seg_M,"Pitch", cut=0.5, verbose = FALSE)
+```
+
+Teraz możemy użyć wykresu pudełkowego żeby porównać te dwie populacje ze sobą:
+
+```{r}
+boxplot(c(td_F,td_M),names=c("Female","Male"),ylab="Hz")
+```
+
+Wniosek jest oczywisty: kobiety mają głosy o wyższej częstotliwości fundamentalnej od mężczyzn. Proszę jednak docenić jak łatwo osiągnęliśmy ten cel. Od postawienia hipotezy, potrzebowaliśmy zaledwie 8 poleceń żeby otrzymać rysunek nadający się praktycznie do umieszczenia w pracy i wysłania na konferencję!
+
+Wiele z tego zawdzięczamy potężnemu językowi zapytań, więc warto się przyjrzeć dokładnie dokumentacji powyżej. Zawiera ona mnóstwo przykładów z życia i pokazuje jak skomplikowane mogą być zapytania wysyłane do bazy.
+
+Inny powód, to sam fakt, że bazę zapisaliśmy w formacie EMU. System ten nas zmusza do organizacji własnych nagrań w konkretny sposób i używając specjalnej struktury informacji, ale nagradza nas bardzo przydatnymi narzędziami i wygodą pracy w wyżej zaprezentowany sposób.
