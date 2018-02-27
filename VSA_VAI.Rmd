@@ -30,6 +30,7 @@ Tak jak poprzednio, wszystko co potrzebne przekopiujemy do osobnej tabelki i usu
 ```{r}
 dt <- data.frame(speaker=segs$session,phoneme=segs$labels,F1=td$fm1,F2=td$fm2)
 dt <- filter(dt, F1 > 0 & F2 > 0)
+dt
 ```
 
 Żeby policzyć **VSA**, musimy policzyć pole wielokąta, którego wierzchołkami są centroidy poszczególnych samogłosek. W tym przypadku analizujemy pole trójkąta (bo mamy 3 samogłoski), ale w literaturze spotykamy różne metody liczenia pola. Dlatego tą metodę nazwano w pracy powyżej *tVSA* (czyli triangular vowel space area).
