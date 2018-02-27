@@ -12,18 +12,18 @@ wyraz **w** ulegnie ubezdźwięcznieniu jeśli po nim następuje wyraz zaczynaj�
 Wczytajmy naszą bazę:
 ```{r}
 library(emuR)
-db = load_emuDB('clarin', verbose = FALSE)
+db <- load_emuDB('clarin', verbose = FALSE)
 ```
 
 Zobaczmy ile jest w ogóle wyrazów **w** w korpusie:
 ```{r}
-segs_all=query(db,'[Word == w]')
+segs_all <- query(db,'[Word == w]')
 ```
 
 Z tych 230 przykładów, zróbmy podział na takie po których następują głoski dźwięczne i bezdźwięczne:
 ```{r}
-segs_unv=query(db,'[Word == w -> [Word =~ .* ^ [Phoneme == t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
-segs_voi=query(db,'[Word == w -> [Word =~ .* ^ [Phoneme != t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
+segs_unv <- query(db,'[Word == w -> [Word =~ .* ^ [Phoneme == t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
+segs_voi <- query(db,'[Word == w -> [Word =~ .* ^ [Phoneme != t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
 ```
 
 Kwerenda ta jest trochę bardziej skomplikowana, więc ją rozbijmy na posczególne części:
