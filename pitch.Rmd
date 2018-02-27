@@ -16,7 +16,7 @@ Zacznijmy zatem po kolei. Wczytajmy bazę i zobaczmy jaką informację posiada:
 
 ```{r}
 library(emuR)
-db = load_emuDB('clarin', verbose = FALSE)
+db <- load_emuDB('clarin', verbose = FALSE)
 list_levelDefinitions(db)
 ```
 
@@ -24,8 +24,8 @@ Według opisu widać, że każda wypowiedź zawiera opis płci mówcy. Nasz prob
 
 Znajdźmy odpowiednio segmenty należące do mężczyzn i do kobiet i zapiszmy je w osobnych zmiennych:
 ```{r}
-seg_F = emuR::query(db,"[Phoneme==a ^ Gender==F]")
-seg_M = emuR::query(db,"[Phoneme==a ^ Gender==M]")
+seg_F <- emuR::query(db,"[Phoneme==a ^ Gender==F]")
+seg_M <- emuR::query(db,"[Phoneme==a ^ Gender==M]")
 ```
 
 Powyższe polecenie szuka wszystkie wystąpienia fonemu *a* w korpusie 10 osób, ale w taki sposób żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można przeczytać wpisując polecenie:
@@ -37,8 +37,8 @@ Na szczęście, ilość segmentów, zarówno jednych, jak i drugich, jest w miar
 
 Wyliczmy najpierw F0 dla poszczególnych segmetnów:
 ```{r}
-td_F = get_trackdata(db, seg_F,"Pitch", cut=0.5, verbose = FALSE)
-td_M = get_trackdata(db, seg_M,"Pitch", cut=0.5, verbose = FALSE)
+td_F <- get_trackdata(db, seg_F,"Pitch", cut=0.5, verbose = FALSE)
+td_M <- get_trackdata(db, seg_M,"Pitch", cut=0.5, verbose = FALSE)
 ```
 
 Teraz możemy użyć wykresu pudełkowego żeby porównać te dwie populacje ze sobą:
