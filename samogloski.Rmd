@@ -25,14 +25,14 @@ library(emuR)
 Po ściągnięciu i rozpakowaniu archiwum z tego linku:
 https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc
 
-Zakładając że jesteśmy w katalogu, gdzie rozpakowano powyższe archiwum, możemy wczytać naszą bazę:
+Zakładając, że jesteśmy w katalogu, gdzie rozpakowano powyższe archiwum, możemy wczytać naszą bazę:
 ```{r}
 db <- load_emuDB('clarin', verbose = FALSE)
 ```
 
 Uwaga: argument `verbose` jest tu potrzebny tylko do poprawnego wyświetlania w tym zeszycie - normalnie nie jest potrzebny.
 
-W pamięci się znalazła zmienna o nazwie `db`, ale w tej postaci nie można wiele z niej wyczytać. Biblioteka emuR zawiera specjalne funkcje do wyświetlania zawartości bazy.
+W pamięci znalazła się zmienna o nazwie `db`, ale w tej postaci nie można wiele z niej wyczytać. Biblioteka emuR zawiera specjalne funkcje do wyświetlania zawartości bazy.
 
 Możemy, na przykład, wyświetlić listę sesji:
 ```{r}
@@ -56,9 +56,9 @@ serve(db)
 ```
 
 
-Ale przede wszystkim, możemy wykonywać specjalne kwerendy do wyszukiwania konkrentnych segmentów w bazie.
+Ale przede wszystkim możemy wykonywać specjalne kwerendy do wyszukiwania konkrentnych segmentów w bazie.
 
-Poszukajmy wszystkie samogłoski dla mówcy nagranego w sesji SES0100:
+Poszukajmy wszystkich samogłosek dla mówcy nagranego w sesji SES0100:
 ```{r}
 segs=query(db,'Phoneme=a|e|i|I|o|u', sessionPattern = "SES0100")
 ```
@@ -70,11 +70,11 @@ str(segs)
 ```
 
 
-Z powyższej tabelki można wyczytać mnóstwo ciekawych informacji i pisać własne programy, które je przetworzą, ale *emuR* posiada narzędzia żeby nam jeszcze bardziej ułatwić życie.
+Z powyższej tabelki można wyczytać dużo ciekawych informacji i pisać własne programy, które je przetworzą, ale *emuR* posiada narzędzia, które nam jeszcze bardziej ułatwią życie.
 
-Czasami, baza danych zawiera już przetworzone dane (tak jak w tym przypadku), ale czasami trzeba użyc biblioteki *wrassp* do przeliczenia informacji z korpusu. W każdym przypadku, używamy poniższego polecenia.
+Czasami baza danych zawiera już przetworzone dane (tak jak w tym przypadku), ale czasami trzeba użyć biblioteki *wrassp* do przeliczenia informacji z korpusu. W każdym przypadku używamy poniższego polecenia.
 
-Następujące polecenie wylicza (wczytuję z dysku) formanty dla wszystkich segmentów. Argument `cut` jest kolejnym udogodnieniem, gdyż dla każdego segmentu zwraca tylko jedną wartość, znajdującą się dokładnie po środku każdego segmentu:
+Następujące polecenie wylicza (wczytuje z dysku) formanty dla wszystkich segmentów. Argument `cut` jest kolejnym udogodnieniem, gdyż dla każdego segmentu zwraca tylko jedną wartość, znajdującą się dokładnie pośrodku każdego segmentu:
 ```{r}
 td <- get_trackdata(db, seglist = segs, ssffTrackName = 'Formants', cut=0.5,
                     verbose = FALSE)
@@ -89,7 +89,7 @@ dane
 ```
 
 
-Mamy tutaj tylko jeden mały problem. Algorytmy aproksymacji formantów czasami zawodzą, a w takich styuacjach najczęściej wpisują jakąś przewidywalną wartość - w tym przypadku 0. Część znalezionychg formantów ma wartość 0, więc warto je usunąć z naszej listy przed narysowaniem. Użyjemy do tego wygodnej biblioteki *dplyr*:
+Mamy tutaj tylko jeden mały problem. Algorytmy aproksymacji formantów czasami zawodzą, a w takich sytuacjach najczęściej wpisują jakąś przewidywalną wartość - w tym przypadku 0. Część znalezionych formantów ma wartość 0, więc warto je usunąć z naszej listy przed narysowaniem. Użyjemy do tego wygodnej biblioteki *dplyr*:
 ```{r}
 library(dplyr)
 dane <- filter(dane,F1>0 & F2>0)
@@ -98,7 +98,7 @@ dane <- filter(dane,F1>0 & F2>0)
 
 W tej chwili straciliśmy ok. 3% danych, ale mamy pewność, że nie ma w nich "śmieci".
 
-Teraz można już rysować zawartość stworzonej tabelki używając funkcji `plot`, ale są dobre sposoby i są lepsze. Otóż, ktoś stworzył świetną bibliotekę do wyświetlania fonemów w przestrzeni 2D i warto z tego skorzystać:
+Teraz można już rysować zawartość stworzonej tabelki używając funkcji `plot`, ale są sposoby dobre i lepsze. Otóż, ktoś stworzył świetną bibliotekę do wyświetlania fonemów w przestrzeni 2D i warto z niej skorzystać:
 ```{r}
 library(phonR)
 ```
@@ -109,7 +109,7 @@ Rysowanie używając tej biblioteki jest trywialne:
 plotVowels(dane$F1,dane$F2,dane$vowel)
 ```
 
-Ale, przy odrobinie czytania dokumentacji i ustawiania argumentów, można uzyskać bardzo ładne rysunki:
+Ale przy odrobinie czytania dokumentacji i ustawiania argumentów, można uzyskać bardzo ładne rysunki:
 ```{r,fig.width=10}
 plotVowels(dane$F1, dane$F2,
            vowel = dane$vowel, 

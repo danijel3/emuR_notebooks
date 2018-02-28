@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 Jako trochę bardziej skomplikowany przykład, zobaczmy następującą hipotezę:
-wyraz **w** ulegnie ubezdźwięcznieniu jeśli po nim następuje wyraz zaczynający się od głoski bezdźwięcznej i analogicznie zostanie dźwięczny w przypadku głoski dźwięcznej. Na przykład:
+wyraz **w** ulegnie ubezdźwięcznieniu, jeśli po nim następuje wyraz zaczynający się od głoski bezdźwięcznej i analogicznie pozostanie dźwięczny w przypadku głoski dźwięcznej. Na przykład:
 
   * w drużynie - **w** jest dźwięczne (czyli *v*)
   * w samochodzie - **w** jest bezdźwięczne (czyli *f*)
@@ -15,43 +15,43 @@ library(emuR)
 db <- load_emuDB('clarin', verbose = FALSE)
 ```
 
-Zobaczmy ile jest w ogóle wyrazów **w** w korpusie:
+Zobaczmy, ile jest w ogóle wyrazów **w** w korpusie:
 ```{r}
 segs_all <- query(db,'[Word == w]')
 ```
 
-Z tych 230 przykładów, zróbmy podział na takie po których następują głoski dźwięczne i bezdźwięczne:
+Z tych 230 przykładów zróbmy podział na takie, po których następują głoski dźwięczne i bezdźwięczne:
 ```{r}
 segs_unv <- query(db,'[Word == w -> [Word =~ .* ^ [Phoneme == t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
 segs_voi <- query(db,'[Word == w -> [Word =~ .* ^ [Phoneme != t | p | s | S | tS | tsi | si | f | x | k | ts & Start(Word,Phoneme)==1]]]')
 ```
 
-Kwerenda ta jest trochę bardziej skomplikowana, więc ją rozbijmy na posczególne części:
+Kwerenda ta jest trochę bardziej skomplikowana, więc rozbijmy ją na posczególne części:
 
   * szukamy wyrazu **w**
-  * po tym wyrazie (znak `->` oznacza następstwo) występuje to co w nawiasie kwadratowym
-  * może to być dowolny wyraz (znak `.*` oznacza dowolną sekwencję znaków - jeśli używamy wyrażeń regularnych, musimy też stosować symoblu `=~` zamiast prostej równości)
+  * po tym wyrazie (znak `->` oznacza następstwo) występuje to, co w nawiasie kwadratowym
+  * może to być dowolny wyraz (znak `.*` oznacza dowolną sekwencję znaków - jeśli używamy wyrażeń regularnych, musimy też stosować symobl `=~` zamiast prostej równości)
   * w innym poziomie tego wyrazu musi występować fonem z listy
-  * fonem ten musi byc na pierwszym miejscu w wyrazie
+  * fonem ten musi być na pierwszym miejscu w wyrazie
   
-Widać, że tutaj znowu mamy szczęście i liczność obydwu grup segmentów jest mniej-więcej równa:
+Widać, że tutaj znowu mamy szczęście i liczność obydwu grup segmentów jest mniej więcej równa:
 ```{r}
 length(segs_voi[,1])
 length(segs_unv[,1])
 ```
 
-Jak spojrzymy na zawartość jednego z tych segmentów, zobaczymy że opis każdego zawiera zarówno wyraz **w**, jak i to co następuje po nim: 
+Jak spojrzymy na zawartość jednego z tych segmentów, zobaczymy, że opis każdego zawiera zarówno wyraz **w**, jak i to, co następuje po nim: 
 ```{r}
 segs_unv$labels[1:10]
 ```
 
-Możemy użyć następującego polecenia żeby wybrać tylko te części segmentów należące do wyrazu **w**:
+Możemy użyć następującego polecenia, żeby wybrać tylko te części segmentów należące do wyrazu **w**:
 ```{r}
 w_unv=requery_seq(db,segs_unv)
 w_voi=requery_seq(db,segs_voi)
 ```
 
-W dodatku, użyjmy następującego polecenia, żeby odczytać annotację wyrazu na poziomie fonemów, zamiast wyrazu:
+Następnie, użyjmy poniższego polecenia, żeby odczytać annotację wyrazu na poziomie fonemów, zamiast wyrazu:
 ```{r}
 ph_unv=requery_hier(db,w_unv,'Phoneme')
 ph_voi=requery_hier(db,w_voi,'Phoneme')
@@ -72,6 +72,6 @@ A na koniec narysujmy wykres:
 barplot(dt,legend=rownames(dt))
 ```
 
-Ten przykład może i nie jest idealny, bo nie wykorzystuje żadne wyliczone cechy, tylko polega na informacji wywnioskowanej przez system automatycznego rozpoznawania mowy. System ten pozwala na podwójną transkrypcję (zarówno *v* jak i *f*) i używa modelu akustycznego wytrenowanego na zbiorze danych żeby dopasować najlepiej pasującą transkrypcję do nagrania. Niemniej jednak, widać że dla większości przypadków, proces ten działa: wyraz **w** jest ubezdźwięczniany w przypadku jeśli po nim następuje głoska dźwięczna i na odwrót.
+Ten przykład może i nie jest idealny, bo nie wykorzystuje żadnych wyliczonych cech, tylko polega na informacji wywnioskowanej przez system automatycznego rozpoznawania mowy. System ten pozwala na podwójną transkrypcję (zarówno *v* jak i *f*) i używa modelu akustycznego, wytrenowanego na zbiorze danych, żeby znaleźć najlepiej pasującą transkrypcję do nagrania. Niemniej jednak widać, że dla większości przypadków, proces ten działa: wyraz **w** jest ubezdźwięczniany, jeśli po nim następuje głoska dźwięczna i na odwrót.
 
-W każdym razie, celem tego zeszytu było pokazanie w miarę skomplikowanej sytuacji życziowej i kwerendy potrzebnej do jej zrealizowania. Pokazano też dwa dodatkowe polecenia, które się bardzo przydają do doprecyzowania poszukiwanej informacji.
+W każdym razie celem tego zeszytu było pokazanie w miarę skomplikowanej sytuacji życiowej i kwerendy potrzebnej do jej zrealizowania. Pokazano też dwa dodatkowe polecenia, które się bardzo przydają do doprecyzowania poszukiwanej informacji.
