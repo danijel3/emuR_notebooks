@@ -173,17 +173,22 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<p>Poprzedni zeszyt pokazał podstawy pracy z biblioteką <strong>emuR</strong>, ale posiada ona o wiele więcej funkcjonalności. Podstawowym celem biblioteki jest żeby zaoszczędzić czas osobom pracującycm z korpusami. Idea pracy z nią polega szybkim testowaniu pomsyłów i hipotez.</p>
-<p>Zacznijmy od prawdziwej hipotezy jaką wszyscy znamy: F0 jest zależne od płci. Co musimy zrobić żeby przetestować prawdziwość tego stwierdzenia:</p>
+<p>Poprzedni zeszyt pokazał podstawy pracy z biblioteką <strong>emuR</strong>, ale posiada ona o wiele więcej funkcjonalności. Podstawowym celem biblioteki jest zaoszczędzenie czasu osobom pracującycm z korpusami. Idea pracy z nią polega na szybkim testowaniu pomsyłów i hipotez.</p>
+<p>Zacznijmy od prawdziwej hipotezy, jaką wszyscy znamy: F0 jest zależne od płci. Co musimy zrobić, żeby przetestować prawdziwość tego stwierdzenia:</p>
 <ol style="list-style-type: decimal">
-<li>znaleźć segmenty dla jakiejść reprezentatywnej głoski (np <em>a</em>)</li>
+<li>znaleźć segmenty dla jakiejś reprezentatywnej głoski (np. <em>a</em>)</li>
 <li>podzielić je według płci</li>
 <li>wyliczyć F0 dla każdego segmentu</li>
 <li>porównać wartości używając jakiegoś sensownego narzędzia</li>
 </ol>
-<p>Zacznijmy zatem po kolei. Wczytajmy bazę i zobaczmy jaką informację posiada:</p>
+<p>Zacznijmy zatem od początku. Wczytajmy bazę i zobaczmy, jaką informację posiada:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShlbXVSKVxuZGIgPC0gbG9hZF9lbXVEQignY2xhcmluJywgdmVyYm9zZSA9IEZBTFNFKVxubGlzdF9sZXZlbERlZmluaXRpb25zKGRiKVxuYGBgIn0= -->
+<pre class="r"><code>library(emuR)
+db &lt;- load_emuDB('clarin', verbose = FALSE)
+list_levelDefinitions(db)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6NX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE0VlJYVS9DTUJTOTJ6cUJ4Uy9rRCt3UHNFUmY5MlFDSVQ2QVJqRHlXcmNpaTZOZHVoTGx6VjhPdGx1dndZYkVKVjF2ejdsZjU5N24wZkl1V2tZQTRFTkFBdkFEYlJKZi96d2cwRFAzRjBBd01LZysxL3FFbHVpOUtNVWs1Um16QUhrVk1yZDJkNzRyUy9wV0l0ZC9XZ3ZPVkpIRkR0RnBpQTF6a3BPSHhYaUtMdlB4WkRxZUxVNVFKOTBBTHBwTVJwUFIwZDVvSDFlNStaV1F4aFBHY3laVHk0UkdDejc2MkhNYXo1VmtkZjB2MGJXcVVtZVlJYWNiVnRzdUNJb3dJTnBxVjZGOXp1WGo2bDRwT1dLckdqSGF2bWR0bmovSmUxSjhKbGpBak1EL2h1WUwzUzZ5a3RiWUJZSlJUaFZOVnBJMnU5ZzdJUjFScVVKd0hlUVA3SENQZ3ozcEFGZGJianJKaDlsNnl6K0d0NmFBWFFEWTdqeWJCMjNTbHZRUHpwTE9HSDh2T0E0bDFQTm1wWDFjYXNXTjRLU1NCVmVvUktOMW9vU2k2QmRsb2tTazBRYjdINlFTMStmNUFnQUEifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -193,7 +198,7 @@ $(document).ready(function () {
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Według opisu widać, że każda wypowiedź zawiera opis płci mówcy. Nasz problem możemy rozwiązać na kilka sposobów, ale tutaj spróbujemy ten prostszy.</p>
+<p>Według opisu widać, że każda wypowiedź zawiera opis płci mówcy. Nasz problem możemy rozwiązać na kilka sposobów, ale tutaj wypróbujemy ten prostszy.</p>
 <p>Znajdźmy odpowiednio segmenty należące do mężczyzn i do kobiet i zapiszmy je w osobnych zmiennych:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -203,7 +208,7 @@ seg_M &lt;- emuR::query(db,&quot;[Phoneme==a ^ Gender==M]&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Powyższe polecenie szuka wszystkie wystąpienia fonemu <em>a</em> w korpusie 10 osób, ale w taki sposób żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można przeczytać wpisując polecenie:</p>
+<p>Powyższe polecenie szuka wszystkich wystąpień fonemu <em>a</em> w korpusie 10 osób, ale w taki sposób, żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można przeczytać wpisując polecenie:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmlnbmV0dGUoJ0VRTCcpXG5gYGAifQ== -->
@@ -211,7 +216,7 @@ seg_M &lt;- emuR::query(db,&quot;[Phoneme==a ^ Gender==M]&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Na szczęście, ilość segmentów, zarówno jednych, jak i drugich, jest w miarę podobna, więc będzie można użyć prostych miar statystyczncyh do ich porównania.</p>
+<p>Na szczęście ilość segmentów, zarówno jednych, jak i drugich, jest w miarę podobna, więc będzie można użyć prostych miar statystycznych do ich porównania.</p>
 <p>Wyliczmy najpierw F0 dla poszczególnych segmetnów:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -221,7 +226,7 @@ td_M &lt;- get_trackdata(db, seg_M,&quot;Pitch&quot;, cut=0.5, verbose = FALSE)<
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Teraz możemy użyć wykresu pudełkowego żeby porównać te dwie populacje ze sobą:</p>
+<p>Teraz możemy użyć wykresu pudełkowego, aby porównać te dwie populacje ze sobą:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYm94cGxvdChjKHRkX0YsdGRfTSksbmFtZXM9YyhcIkZlbWFsZVwiLFwiTWFsZVwiKSx5bGFiPVwiSHpcIilcbmBgYCJ9 -->
@@ -232,12 +237,12 @@ td_M &lt;- get_trackdata(db, seg_M,&quot;Pitch&quot;, cut=0.5, verbose = FALSE)<
 <!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Wniosek jest oczywisty: kobiety mają głosy o wyższej częstotliwości fundamentalnej od mężczyzn. Proszę jednak docenić jak łatwo osiągnęliśmy ten cel. Od postawienia hipotezy, potrzebowaliśmy zaledwie 8 poleceń żeby otrzymać rysunek nadający się praktycznie do umieszczenia w pracy i wysłania na konferencję!</p>
-<p>Wiele z tego zawdzięczamy potężnemu językowi zapytań, więc warto się przyjrzeć dokładnie dokumentacji powyżej. Zawiera ona mnóstwo przykładów z życia i pokazuje jak skomplikowane mogą być zapytania wysyłane do bazy.</p>
-<p>Inny powód, to sam fakt, że bazę zapisaliśmy w formacie EMU. System ten nas zmusza do organizacji własnych nagrań w konkretny sposób i używając specjalnej struktury informacji, ale nagradza nas bardzo przydatnymi narzędziami i wygodą pracy w wyżej zaprezentowany sposób.</p>
+<p>Wniosek jest oczywisty: kobiety mają głosy o wyższej częstotliwości fundamentalnej od mężczyzn. Proszę jednak docenić, jak łatwo osiągnęliśmy ten cel. Od postawienia hipotezy potrzebowaliśmy zaledwie 8 poleceń, żeby otrzymać rysunek nadający się praktycznie do umieszczenia w pracy i wysłania na konferencję!</p>
+<p>Wiele z tego zawdzięczamy potężnemu językowi zapytań, więc warto się przyjrzeć dokładnie dokumentacji powyżej. Zawiera ona mnóstwo przykładów z życia i pokazuje, jak skomplikowane mogą być zapytania wysyłane do bazy.</p>
+<p>Inny powód to sam fakt, że bazę zapisaliśmy w formacie EMU. System ten zmusza nas do organizacji własnych nagrań w konkretny sposób i używając specjalnej struktury informacji, ale nagradza nas bardzo przydatnymi narzędziami i wygodą pracy w wyżej zaprezentowany sposób.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRjAgdyBlbXVSIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpQb3ByemVkbmkgemVzenl0IHBva2F6YcWCIHBvZHN0YXd5IHByYWN5IHogYmlibGlvdGVrxIUgKiplbXVSKiosIGFsZSBwb3NpYWRhIG9uYSBvIHdpZWxlIHdpxJljZWogZnVua2Nqb25hbG5vxZtjaS4gUG9kc3Rhd293eW0gY2VsZW0gYmlibGlvdGVraSBqZXN0IMW8ZWJ5IHphb3N6Y3rEmWR6acSHIGN6YXMgb3NvYm9tIHByYWN1asSFY3ljbSB6IGtvcnB1c2FtaS4gSWRlYSBwcmFjeSB6IG5pxIUgcG9sZWdhIHN6eWJraW0gdGVzdG93YW5pdSBwb21zecWCw7N3IGkgaGlwb3Rlei4KClphY3puaWpteSBvZCBwcmF3ZHppd2VqIGhpcG90ZXp5IGpha8SFIHdzenlzY3kgem5hbXk6IEYwIGplc3QgemFsZcW8bmUgb2QgcMWCY2kuIENvIG11c2lteSB6cm9iacSHIMW8ZWJ5IHByemV0ZXN0b3dhxIcgcHJhd2R6aXdvxZvEhyB0ZWdvIHN0d2llcmR6ZW5pYToKICAKICAxLiB6bmFsZcW6xIcgc2VnbWVudHkgZGxhIGpha2llasWbxIcgcmVwcmV6ZW50YXR5d25laiBnxYJvc2tpIChucCAqYSopCiAgMi4gcG9kemllbGnEhyBqZSB3ZWTFgnVnIHDFgmNpCiAgMy4gd3lsaWN6ecSHIEYwIGRsYSBrYcW8ZGVnbyBzZWdtZW50dQogIDQuIHBvcsOzd25hxIcgd2FydG/Fm2NpIHXFvHl3YWrEhWMgamFraWVnb8WbIHNlbnNvd25lZ28gbmFyesSZZHppYQogIApaYWN6bmlqbXkgemF0ZW0gcG8ga29sZWkuIFdjenl0YWpteSBiYXrEmSBpIHpvYmFjem15IGpha8SFIGluZm9ybWFjasSZIHBvc2lhZGE6CgpgYGB7cn0KbGlicmFyeShlbXVSKQpkYiA8LSBsb2FkX2VtdURCKCdjbGFyaW4nLCB2ZXJib3NlID0gRkFMU0UpCmxpc3RfbGV2ZWxEZWZpbml0aW9ucyhkYikKYGBgCgpXZWTFgnVnIG9waXN1IHdpZGHEhywgxbxlIGthxbxkYSB3eXBvd2llZMW6IHphd2llcmEgb3BpcyBwxYJjaSBtw7N3Y3kuIE5hc3ogcHJvYmxlbSBtb8W8ZW15IHJvendpxIV6YcSHIG5hIGtpbGthIHNwb3NvYsOzdywgYWxlIHR1dGFqIHNwcsOzYnVqZW15IHRlbiBwcm9zdHN6eS4KClpuYWpkxbpteSBvZHBvd2llZG5pbyBzZWdtZW50eSBuYWxlxbzEhWNlIGRvIG3EmcW8Y3p5em4gaSBkbyBrb2JpZXQgaSB6YXBpc3pteSBqZSB3IG9zb2JueWNoIHptaWVubnljaDoKYGBge3J9CnNlZ19GIDwtIGVtdVI6OnF1ZXJ5KGRiLCJbUGhvbmVtZT09YSBeIEdlbmRlcj09Rl0iKQpzZWdfTSA8LSBlbXVSOjpxdWVyeShkYiwiW1Bob25lbWU9PWEgXiBHZW5kZXI9PU1dIikKYGBgCgpQb3d5xbxzemUgcG9sZWNlbmllIHN6dWthIHdzenlzdGtpZSB3eXN0xIVwaWVuaWEgZm9uZW11ICphKiB3IGtvcnB1c2llIDEwIG9zw7NiLCBhbGUgdyB0YWtpIHNwb3PDs2IgxbxlYnkgdyBwb3ppb21pZSB3ecW8c3p5bSwgY3p5bGkgemRhbml1LCBhbm5vdGFjamEgcMWCY2kgYnnFgmEgb2Rwb3dpZWRuaW8gTSBsdWIgRi4gRG9rxYJhZG55IG9waXMgasSZenlrYSB6YXB5dGHFhCBtb8W8bmEgcHJ6ZWN6eXRhxIcgd3Bpc3VqxIVjIHBvbGVjZW5pZToKYGBge3J9CnZpZ25ldHRlKCdFUUwnKQpgYGAKCk5hIHN6Y3rEmcWbY2llLCBpbG/Fm8SHIHNlZ21lbnTDs3csIHphcsOzd25vIGplZG55Y2gsIGphayBpIGRydWdpY2gsIGplc3QgdyBtaWFyxJkgcG9kb2JuYSwgd2nEmWMgYsSZZHppZSBtb8W8bmEgdcW8ecSHIHByb3N0eWNoIG1pYXIgc3RhdHlzdHljem5jeWggZG8gaWNoIHBvcsOzd25hbmlhLgoKV3lsaWN6bXkgbmFqcGllcncgRjAgZGxhIHBvc3pjemVnw7NsbnljaCBzZWdtZXRuw7N3OgpgYGB7cn0KdGRfRiA8LSBnZXRfdHJhY2tkYXRhKGRiLCBzZWdfRiwiUGl0Y2giLCBjdXQ9MC41LCB2ZXJib3NlID0gRkFMU0UpCnRkX00gPC0gZ2V0X3RyYWNrZGF0YShkYiwgc2VnX00sIlBpdGNoIiwgY3V0PTAuNSwgdmVyYm9zZSA9IEZBTFNFKQpgYGAKClRlcmF6IG1vxbxlbXkgdcW8ecSHIHd5a3Jlc3UgcHVkZcWCa293ZWdvIMW8ZWJ5IHBvcsOzd25hxIcgdGUgZHdpZSBwb3B1bGFjamUgemUgc29ixIU6CgpgYGB7cn0KYm94cGxvdChjKHRkX0YsdGRfTSksbmFtZXM9YygiRmVtYWxlIiwiTWFsZSIpLHlsYWI9Ikh6IikKYGBgCgpXbmlvc2VrIGplc3Qgb2N6eXdpc3R5OiBrb2JpZXR5IG1hasSFIGfFgm9zeSBvIHd5xbxzemVqIGN6xJlzdG90bGl3b8WbY2kgZnVuZGFtZW50YWxuZWogb2QgbcSZxbxjenl6bi4gUHJvc3rEmSBqZWRuYWsgZG9jZW5pxIcgamFrIMWCYXR3byBvc2nEhWduxJlsacWbbXkgdGVuIGNlbC4gT2QgcG9zdGF3aWVuaWEgaGlwb3RlenksIHBvdHJ6ZWJvd2FsacWbbXkgemFsZWR3aWUgOCBwb2xlY2XFhCDFvGVieSBvdHJ6eW1hxIcgcnlzdW5layBuYWRhasSFY3kgc2nEmSBwcmFrdHljem5pZSBkbyB1bWllc3pjemVuaWEgdyBwcmFjeSBpIHd5c8WCYW5pYSBuYSBrb25mZXJlbmNqxJkhCgpXaWVsZSB6IHRlZ28gemF3ZHppxJljemFteSBwb3TEmcW8bmVtdSBqxJl6eWtvd2kgemFweXRhxYQsIHdpxJljIHdhcnRvIHNpxJkgcHJ6eWpyemXEhyBkb2vFgmFkbmllIGRva3VtZW50YWNqaSBwb3d5xbxlai4gWmF3aWVyYSBvbmEgbW7Ds3N0d28gcHJ6eWvFgmFkw7N3IHogxbx5Y2lhIGkgcG9rYXp1amUgamFrIHNrb21wbGlrb3dhbmUgbW9nxIUgYnnEhyB6YXB5dGFuaWEgd3lzecWCYW5lIGRvIGJhenkuCgpJbm55IHBvd8OzZCwgdG8gc2FtIGZha3QsIMW8ZSBiYXrEmSB6YXBpc2FsacWbbXkgdyBmb3JtYWNpZSBFTVUuIFN5c3RlbSB0ZW4gbmFzIHptdXN6YSBkbyBvcmdhbml6YWNqaSB3xYJhc255Y2ggbmFncmHFhCB3IGtvbmtyZXRueSBzcG9zw7NiIGkgdcW8eXdhasSFYyBzcGVjamFsbmVqIHN0cnVrdHVyeSBpbmZvcm1hY2ppLCBhbGUgbmFncmFkemEgbmFzIGJhcmR6byBwcnp5ZGF0bnltaSBuYXJ6xJlkemlhbWkgaSB3eWdvZMSFIHByYWN5IHcgd3nFvGVqIHphcHJlemVudG93YW55IHNwb3PDs2IuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRjAgdyBlbXVSIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpQb3ByemVkbmkgemVzenl0IHBva2F6YcWCIHBvZHN0YXd5IHByYWN5IHogYmlibGlvdGVrxIUgKiplbXVSKiosIGFsZSBwb3NpYWRhIG9uYSBvIHdpZWxlIHdpxJljZWogZnVua2Nqb25hbG5vxZtjaS4gUG9kc3Rhd293eW0gY2VsZW0gYmlibGlvdGVraSBqZXN0IHphb3N6Y3rEmWR6ZW5pZSBjemFzdSBvc29ib20gcHJhY3VqxIVjeWNtIHoga29ycHVzYW1pLiBJZGVhIHByYWN5IHogbmnEhSBwb2xlZ2EgbmEgc3p5YmtpbSB0ZXN0b3dhbml1IHBvbXN5xYLDs3cgaSBoaXBvdGV6LgoKWmFjem5pam15IG9kIHByYXdkeml3ZWogaGlwb3RlenksIGpha8SFIHdzenlzY3kgem5hbXk6IEYwIGplc3QgemFsZcW8bmUgb2QgcMWCY2kuIENvIG11c2lteSB6cm9iacSHLCDFvGVieSBwcnpldGVzdG93YcSHIHByYXdkeml3b8WbxIcgdGVnbyBzdHdpZXJkemVuaWE6CiAgCiAgMS4gem5hbGXFusSHIHNlZ21lbnR5IGRsYSBqYWtpZWrFmyByZXByZXplbnRhdHl3bmVqIGfFgm9za2kgKG5wLiAqYSopCiAgMi4gcG9kemllbGnEhyBqZSB3ZWTFgnVnIHDFgmNpCiAgMy4gd3lsaWN6ecSHIEYwIGRsYSBrYcW8ZGVnbyBzZWdtZW50dQogIDQuIHBvcsOzd25hxIcgd2FydG/Fm2NpIHXFvHl3YWrEhWMgamFraWVnb8WbIHNlbnNvd25lZ28gbmFyesSZZHppYQogIApaYWN6bmlqbXkgemF0ZW0gb2QgcG9jesSFdGt1LiBXY3p5dGFqbXkgYmF6xJkgaSB6b2JhY3pteSwgamFrxIUgaW5mb3JtYWNqxJkgcG9zaWFkYToKCmBgYHtyfQpsaWJyYXJ5KGVtdVIpCmRiIDwtIGxvYWRfZW11REIoJ2NsYXJpbicsIHZlcmJvc2UgPSBGQUxTRSkKbGlzdF9sZXZlbERlZmluaXRpb25zKGRiKQpgYGAKCldlZMWCdWcgb3Bpc3Ugd2lkYcSHLCDFvGUga2HFvGRhIHd5cG93aWVkxbogemF3aWVyYSBvcGlzIHDFgmNpIG3Ds3djeS4gTmFzeiBwcm9ibGVtIG1vxbxlbXkgcm96d2nEhXphxIcgbmEga2lsa2Egc3Bvc29iw7N3LCBhbGUgdHV0YWogd3lwcsOzYnVqZW15IHRlbiBwcm9zdHN6eS4KClpuYWpkxbpteSBvZHBvd2llZG5pbyBzZWdtZW50eSBuYWxlxbzEhWNlIGRvIG3EmcW8Y3p5em4gaSBkbyBrb2JpZXQgaSB6YXBpc3pteSBqZSB3IG9zb2JueWNoIHptaWVubnljaDoKYGBge3J9CnNlZ19GIDwtIGVtdVI6OnF1ZXJ5KGRiLCJbUGhvbmVtZT09YSBeIEdlbmRlcj09Rl0iKQpzZWdfTSA8LSBlbXVSOjpxdWVyeShkYiwiW1Bob25lbWU9PWEgXiBHZW5kZXI9PU1dIikKYGBgCgpQb3d5xbxzemUgcG9sZWNlbmllIHN6dWthIHdzenlzdGtpY2ggd3lzdMSFcGllxYQgZm9uZW11ICphKiB3IGtvcnB1c2llIDEwIG9zw7NiLCBhbGUgdyB0YWtpIHNwb3PDs2IsIMW8ZWJ5IHcgcG96aW9taWUgd3nFvHN6eW0sIGN6eWxpIHpkYW5pdSwgYW5ub3RhY2phIHDFgmNpIGJ5xYJhIG9kcG93aWVkbmlvIE0gbHViIEYuIERva8WCYWRueSBvcGlzIGrEmXp5a2EgemFweXRhxYQgbW/FvG5hIHByemVjenl0YcSHIHdwaXN1asSFYyBwb2xlY2VuaWU6CmBgYHtyfQp2aWduZXR0ZSgnRVFMJykKYGBgCgpOYSBzemN6xJnFm2NpZSBpbG/Fm8SHIHNlZ21lbnTDs3csIHphcsOzd25vIGplZG55Y2gsIGphayBpIGRydWdpY2gsIGplc3QgdyBtaWFyxJkgcG9kb2JuYSwgd2nEmWMgYsSZZHppZSBtb8W8bmEgdcW8ecSHIHByb3N0eWNoIG1pYXIgc3RhdHlzdHljem55Y2ggZG8gaWNoIHBvcsOzd25hbmlhLgoKV3lsaWN6bXkgbmFqcGllcncgRjAgZGxhIHBvc3pjemVnw7NsbnljaCBzZWdtZXRuw7N3OgpgYGB7cn0KdGRfRiA8LSBnZXRfdHJhY2tkYXRhKGRiLCBzZWdfRiwiUGl0Y2giLCBjdXQ9MC41LCB2ZXJib3NlID0gRkFMU0UpCnRkX00gPC0gZ2V0X3RyYWNrZGF0YShkYiwgc2VnX00sIlBpdGNoIiwgY3V0PTAuNSwgdmVyYm9zZSA9IEZBTFNFKQpgYGAKClRlcmF6IG1vxbxlbXkgdcW8ecSHIHd5a3Jlc3UgcHVkZcWCa293ZWdvLCBhYnkgcG9yw7N3bmHEhyB0ZSBkd2llIHBvcHVsYWNqZSB6ZSBzb2LEhToKCmBgYHtyfQpib3hwbG90KGModGRfRix0ZF9NKSxuYW1lcz1jKCJGZW1hbGUiLCJNYWxlIikseWxhYj0iSHoiKQpgYGAKClduaW9zZWsgamVzdCBvY3p5d2lzdHk6IGtvYmlldHkgbWFqxIUgZ8WCb3N5IG8gd3nFvHN6ZWogY3rEmXN0b3RsaXdvxZtjaSBmdW5kYW1lbnRhbG5laiBvZCBtxJnFvGN6eXpuLiBQcm9zesSZIGplZG5hayBkb2NlbmnEhywgamFrIMWCYXR3byBvc2nEhWduxJlsacWbbXkgdGVuIGNlbC4gT2QgcG9zdGF3aWVuaWEgaGlwb3RlenkgcG90cnplYm93YWxpxZtteSB6YWxlZHdpZSA4IHBvbGVjZcWELCDFvGVieSBvdHJ6eW1hxIcgcnlzdW5layBuYWRhasSFY3kgc2nEmSBwcmFrdHljem5pZSBkbyB1bWllc3pjemVuaWEgdyBwcmFjeSBpIHd5c8WCYW5pYSBuYSBrb25mZXJlbmNqxJkhCgpXaWVsZSB6IHRlZ28gemF3ZHppxJljemFteSBwb3TEmcW8bmVtdSBqxJl6eWtvd2kgemFweXRhxYQsIHdpxJljIHdhcnRvIHNpxJkgcHJ6eWpyemXEhyBkb2vFgmFkbmllIGRva3VtZW50YWNqaSBwb3d5xbxlai4gWmF3aWVyYSBvbmEgbW7Ds3N0d28gcHJ6eWvFgmFkw7N3IHogxbx5Y2lhIGkgcG9rYXp1amUsIGphayBza29tcGxpa293YW5lIG1vZ8SFIGJ5xIcgemFweXRhbmlhIHd5c3nFgmFuZSBkbyBiYXp5LgoKSW5ueSBwb3fDs2QgdG8gc2FtIGZha3QsIMW8ZSBiYXrEmSB6YXBpc2FsacWbbXkgdyBmb3JtYWNpZSBFTVUuIFN5c3RlbSB0ZW4gem11c3phIG5hcyBkbyBvcmdhbml6YWNqaSB3xYJhc255Y2ggbmFncmHFhCB3IGtvbmtyZXRueSBzcG9zw7NiIGkgdcW8eXdhasSFYyBzcGVjamFsbmVqIHN0cnVrdHVyeSBpbmZvcm1hY2ppLCBhbGUgbmFncmFkemEgbmFzIGJhcmR6byBwcnp5ZGF0bnltaSBuYXJ6xJlkemlhbWkgaSB3eWdvZMSFIHByYWN5IHcgd3nFvGVqIHphcHJlemVudG93YW55IHNwb3PDs2IuCg==</div>
 
 
 

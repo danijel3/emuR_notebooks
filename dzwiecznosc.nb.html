@@ -173,7 +173,7 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<p>Jako trochę bardziej skomplikowany przykład, zobaczmy następującą hipotezę: wyraz <strong>w</strong> ulegnie ubezdźwięcznieniu jeśli po nim następuje wyraz zaczynający się od głoski bezdźwięcznej i analogicznie zostanie dźwięczny w przypadku głoski dźwięcznej. Na przykład:</p>
+<p>Jako trochę bardziej skomplikowany przykład, zobaczmy następującą hipotezę: wyraz <strong>w</strong> ulegnie ubezdźwięcznieniu, jeśli po nim następuje wyraz zaczynający się od głoski bezdźwięcznej i analogicznie pozostanie dźwięczny w przypadku głoski dźwięcznej. Na przykład:</p>
 <ul>
 <li>w drużynie - <strong>w</strong> jest dźwięczne (czyli <em>v</em>)</li>
 <li>w samochodzie - <strong>w</strong> jest bezdźwięczne (czyli <em>f</em>)</li>
@@ -187,7 +187,7 @@ db &lt;- load_emuDB('clarin', verbose = FALSE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Zobaczmy ile jest w ogóle wyrazów <strong>w</strong> w korpusie:</p>
+<p>Zobaczmy, ile jest w ogóle wyrazów <strong>w</strong> w korpusie:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2Vnc19hbGwgPC0gcXVlcnkoZGIsJ1tXb3JkID09IHddJylcbmBgYCJ9 -->
@@ -195,7 +195,7 @@ db &lt;- load_emuDB('clarin', verbose = FALSE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Z tych 230 przykładów, zróbmy podział na takie po których następują głoski dźwięczne i bezdźwięczne:</p>
+<p>Z tych 230 przykładów zróbmy podział na takie, po których następują głoski dźwięczne i bezdźwięczne:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2Vnc191bnYgPC0gcXVlcnkoZGIsJ1tXb3JkID09IHcgLT4gW1dvcmQgPX4gLiogXiBbUGhvbmVtZSA9PSB0IHwgcCB8IHMgfCBTIHwgdFMgfCB0c2kgfCBzaSB8IGYgfCB4IHwgayB8IHRzICYgU3RhcnQoV29yZCxQaG9uZW1lKT09MV1dXScpXG5zZWdzX3ZvaSA8LSBxdWVyeShkYiwnW1dvcmQgPT0gdyAtPiBbV29yZCA9fiAuKiBeIFtQaG9uZW1lICE9IHQgfCBwIHwgcyB8IFMgfCB0UyB8IHRzaSB8IHNpIHwgZiB8IHggfCBrIHwgdHMgJiBTdGFydChXb3JkLFBob25lbWUpPT0xXV1dJylcbmBgYCJ9 -->
@@ -204,15 +204,15 @@ segs_voi &lt;- query(db,'[Word == w -&gt; [Word =~ .* ^ [Phoneme != t | p | s | 
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Kwerenda ta jest trochę bardziej skomplikowana, więc ją rozbijmy na posczególne części:</p>
+<p>Kwerenda ta jest trochę bardziej skomplikowana, więc rozbijmy ją na posczególne części:</p>
 <ul>
 <li>szukamy wyrazu <strong>w</strong></li>
-<li>po tym wyrazie (znak <code>-&gt;</code> oznacza następstwo) występuje to co w nawiasie kwadratowym</li>
-<li>może to być dowolny wyraz (znak <code>.*</code> oznacza dowolną sekwencję znaków - jeśli używamy wyrażeń regularnych, musimy też stosować symoblu <code>=~</code> zamiast prostej równości)</li>
+<li>po tym wyrazie (znak <code>-&gt;</code> oznacza następstwo) występuje to, co w nawiasie kwadratowym</li>
+<li>może to być dowolny wyraz (znak <code>.*</code> oznacza dowolną sekwencję znaków - jeśli używamy wyrażeń regularnych, musimy też stosować symobl <code>=~</code> zamiast prostej równości)</li>
 <li>w innym poziomie tego wyrazu musi występować fonem z listy</li>
-<li>fonem ten musi byc na pierwszym miejscu w wyrazie</li>
+<li>fonem ten musi być na pierwszym miejscu w wyrazie</li>
 </ul>
-<p>Widać, że tutaj znowu mamy szczęście i liczność obydwu grup segmentów jest mniej-więcej równa:</p>
+<p>Widać, że tutaj znowu mamy szczęście i liczność obydwu grup segmentów jest mniej więcej równa:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGVuZ3RoKHNlZ3Nfdm9pWywxXSlcbmBgYCJ9 -->
@@ -229,7 +229,7 @@ segs_voi &lt;- query(db,'[Word == w -&gt; [Word =~ .* ^ [Phoneme != t | p | s | 
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Jak spojrzymy na zawartość jednego z tych segmentów, zobaczymy że opis każdego zawiera zarówno wyraz <strong>w</strong>, jak i to co następuje po nim:</p>
+<p>Jak spojrzymy na zawartość jednego z tych segmentów, zobaczymy, że opis każdego zawiera zarówno wyraz <strong>w</strong>, jak i to, co następuje po nim:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2Vnc191bnYkbGFiZWxzWzE6MTBdXG5gYGAifQ== -->
@@ -242,7 +242,7 @@ segs_voi &lt;- query(db,'[Word == w -&gt; [Word =~ .* ^ [Phoneme != t | p | s | 
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Możemy użyć następującego polecenia żeby wybrać tylko te części segmentów należące do wyrazu <strong>w</strong>:</p>
+<p>Możemy użyć następującego polecenia, żeby wybrać tylko te części segmentów należące do wyrazu <strong>w</strong>:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud191bnY9cmVxdWVyeV9zZXEoZGIsc2Vnc191bnYpXG53X3ZvaT1yZXF1ZXJ5X3NlcShkYixzZWdzX3ZvaSlcbmBgYCJ9 -->
@@ -251,7 +251,7 @@ w_voi=requery_seq(db,segs_voi)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>W dodatku, użyjmy następującego polecenia, żeby odczytać annotację wyrazu na poziomie fonemów, zamiast wyrazu:</p>
+<p>Następnie, użyjmy poniższego polecenia, żeby odczytać annotację wyrazu na poziomie fonemów, zamiast wyrazu:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGhfdW52PXJlcXVlcnlfaGllcihkYix3X3VudiwnUGhvbmVtZScpXG5waF92b2k9cmVxdWVyeV9oaWVyKGRiLHdfdm9pLCdQaG9uZW1lJylcbmBgYCJ9 -->
@@ -290,11 +290,11 @@ voicness   f   v
 <!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Ten przykład może i nie jest idealny, bo nie wykorzystuje żadne wyliczone cechy, tylko polega na informacji wywnioskowanej przez system automatycznego rozpoznawania mowy. System ten pozwala na podwójną transkrypcję (zarówno <em>v</em> jak i <em>f</em>) i używa modelu akustycznego wytrenowanego na zbiorze danych żeby dopasować najlepiej pasującą transkrypcję do nagrania. Niemniej jednak, widać że dla większości przypadków, proces ten działa: wyraz <strong>w</strong> jest ubezdźwięczniany w przypadku jeśli po nim następuje głoska dźwięczna i na odwrót.</p>
-<p>W każdym razie, celem tego zeszytu było pokazanie w miarę skomplikowanej sytuacji życziowej i kwerendy potrzebnej do jej zrealizowania. Pokazano też dwa dodatkowe polecenia, które się bardzo przydają do doprecyzowania poszukiwanej informacji.</p>
+<p>Ten przykład może i nie jest idealny, bo nie wykorzystuje żadnych wyliczonych cech, tylko polega na informacji wywnioskowanej przez system automatycznego rozpoznawania mowy. System ten pozwala na podwójną transkrypcję (zarówno <em>v</em> jak i <em>f</em>) i używa modelu akustycznego, wytrenowanego na zbiorze danych, żeby znaleźć najlepiej pasującą transkrypcję do nagrania. Niemniej jednak widać, że dla większości przypadków, proces ten działa: wyraz <strong>w</strong> jest ubezdźwięczniany, jeśli po nim następuje głoska dźwięczna i na odwrót.</p>
+<p>W każdym razie celem tego zeszytu było pokazanie w miarę skomplikowanej sytuacji życiowej i kwerendy potrzebnej do jej zrealizowania. Pokazano też dwa dodatkowe polecenia, które się bardzo przydają do doprecyzowania poszukiwanej informacji.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR8WCb3NraSBkxbp3acSZY3puZSBpIGJlemTFundpxJljem5lIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpKYWtvIHRyb2NoxJkgYmFyZHppZWogc2tvbXBsaWtvd2FueSBwcnp5a8WCYWQsIHpvYmFjem15IG5hc3TEmXB1asSFY8SFIGhpcG90ZXrEmToKd3lyYXogKip3KiogdWxlZ25pZSB1YmV6ZMW6d2nEmWN6bmllbml1IGplxZtsaSBwbyBuaW0gbmFzdMSZcHVqZSB3eXJheiB6YWN6eW5hasSFY3kgc2nEmSBvZCBnxYJvc2tpIGJlemTFundpxJljem5laiBpIGFuYWxvZ2ljem5pZSB6b3N0YW5pZSBkxbp3acSZY3pueSB3IHByenlwYWRrdSBnxYJvc2tpIGTFundpxJljem5lai4gTmEgcHJ6eWvFgmFkOgoKICAqIHcgZHJ1xbx5bmllIC0gKip3KiogamVzdCBkxbp3acSZY3puZSAoY3p5bGkgKnYqKQogICogdyBzYW1vY2hvZHppZSAtICoqdyoqIGplc3QgYmV6ZMW6d2nEmWN6bmUgKGN6eWxpICpmKikKICAKV2N6eXRham15IG5hc3rEhSBiYXrEmToKYGBge3J9CmxpYnJhcnkoZW11UikKZGIgPC0gbG9hZF9lbXVEQignY2xhcmluJywgdmVyYm9zZSA9IEZBTFNFKQpgYGAKClpvYmFjem15IGlsZSBqZXN0IHcgb2fDs2xlIHd5cmF6w7N3ICoqdyoqIHcga29ycHVzaWU6CmBgYHtyfQpzZWdzX2FsbCA8LSBxdWVyeShkYiwnW1dvcmQgPT0gd10nKQpgYGAKClogdHljaCAyMzAgcHJ6eWvFgmFkw7N3LCB6csOzYm15IHBvZHppYcWCIG5hIHRha2llIHBvIGt0w7NyeWNoIG5hc3TEmXB1asSFIGfFgm9za2kgZMW6d2nEmWN6bmUgaSBiZXpkxbp3acSZY3puZToKYGBge3J9CnNlZ3NfdW52IDwtIHF1ZXJ5KGRiLCdbV29yZCA9PSB3IC0+IFtXb3JkID1+IC4qIF4gW1Bob25lbWUgPT0gdCB8IHAgfCBzIHwgUyB8IHRTIHwgdHNpIHwgc2kgfCBmIHwgeCB8IGsgfCB0cyAmIFN0YXJ0KFdvcmQsUGhvbmVtZSk9PTFdXV0nKQpzZWdzX3ZvaSA8LSBxdWVyeShkYiwnW1dvcmQgPT0gdyAtPiBbV29yZCA9fiAuKiBeIFtQaG9uZW1lICE9IHQgfCBwIHwgcyB8IFMgfCB0UyB8IHRzaSB8IHNpIHwgZiB8IHggfCBrIHwgdHMgJiBTdGFydChXb3JkLFBob25lbWUpPT0xXV1dJykKYGBgCgpLd2VyZW5kYSB0YSBqZXN0IHRyb2NoxJkgYmFyZHppZWogc2tvbXBsaWtvd2FuYSwgd2nEmWMgasSFIHJvemJpam15IG5hIHBvc2N6ZWfDs2xuZSBjesSZxZtjaToKCiAgKiBzenVrYW15IHd5cmF6dSAqKncqKgogICogcG8gdHltIHd5cmF6aWUgKHpuYWsgYC0+YCBvem5hY3phIG5hc3TEmXBzdHdvKSB3eXN0xJlwdWplIHRvIGNvIHcgbmF3aWFzaWUga3dhZHJhdG93eW0KICAqIG1vxbxlIHRvIGJ5xIcgZG93b2xueSB3eXJheiAoem5hayBgLipgIG96bmFjemEgZG93b2xuxIUgc2Vrd2VuY2rEmSB6bmFrw7N3IC0gamXFm2xpIHXFvHl3YW15IHd5cmHFvGXFhCByZWd1bGFybnljaCwgbXVzaW15IHRlxbwgc3Rvc293YcSHIHN5bW9ibHUgYD1+YCB6YW1pYXN0IHByb3N0ZWogcsOzd25vxZtjaSkKICAqIHcgaW5ueW0gcG96aW9taWUgdGVnbyB3eXJhenUgbXVzaSB3eXN0xJlwb3dhxIcgZm9uZW0geiBsaXN0eQogICogZm9uZW0gdGVuIG11c2kgYnljIG5hIHBpZXJ3c3p5bSBtaWVqc2N1IHcgd3lyYXppZQogIApXaWRhxIcsIMW8ZSB0dXRhaiB6bm93dSBtYW15IHN6Y3rEmcWbY2llIGkgbGljem5vxZvEhyBvYnlkd3UgZ3J1cCBzZWdtZW50w7N3IGplc3QgbW5pZWotd2nEmWNlaiByw7N3bmE6CmBgYHtyfQpsZW5ndGgoc2Vnc192b2lbLDFdKQpsZW5ndGgoc2Vnc191bnZbLDFdKQpgYGAKCkphayBzcG9qcnp5bXkgbmEgemF3YXJ0b8WbxIcgamVkbmVnbyB6IHR5Y2ggc2VnbWVudMOzdywgem9iYWN6eW15IMW8ZSBvcGlzIGthxbxkZWdvIHphd2llcmEgemFyw7N3bm8gd3lyYXogKip3KiosIGphayBpIHRvIGNvIG5hc3TEmXB1amUgcG8gbmltOiAKYGBge3J9CnNlZ3NfdW52JGxhYmVsc1sxOjEwXQpgYGAKCk1vxbxlbXkgdcW8ecSHIG5hc3TEmXB1asSFY2VnbyBwb2xlY2VuaWEgxbxlYnkgd3licmHEhyB0eWxrbyB0ZSBjesSZxZtjaSBzZWdtZW50w7N3IG5hbGXFvMSFY2UgZG8gd3lyYXp1ICoqdyoqOgpgYGB7cn0Kd191bnY9cmVxdWVyeV9zZXEoZGIsc2Vnc191bnYpCndfdm9pPXJlcXVlcnlfc2VxKGRiLHNlZ3Nfdm9pKQpgYGAKClcgZG9kYXRrdSwgdcW8eWpteSBuYXN0xJlwdWrEhWNlZ28gcG9sZWNlbmlhLCDFvGVieSBvZGN6eXRhxIcgYW5ub3RhY2rEmSB3eXJhenUgbmEgcG96aW9taWUgZm9uZW3Ds3csIHphbWlhc3Qgd3lyYXp1OgpgYGB7cn0KcGhfdW52PXJlcXVlcnlfaGllcihkYix3X3VudiwnUGhvbmVtZScpCnBoX3ZvaT1yZXF1ZXJ5X2hpZXIoZGIsd192b2ksJ1Bob25lbWUnKQpgYGAKClpyw7NibXkgdGVyYXogdGFiZWzEmSBwb2RzdW1vd3VqxIVjxIU6CmBgYHtyfQpkX3ZvaT1kYXRhLmZyYW1lKHZvaWNuZXNzPXJlcCgnRMW6dy4nLGxlbmd0aChwaF92b2lbLDFdKSksCiAgICAgICAgICAgICAgICAgcGhvbmVtZT1waF92b2kkbGFiZWxzKQpkX3Vudj1kYXRhLmZyYW1lKHZvaWNuZXNzPXJlcCgnQmV6ZMW6LicsbGVuZ3RoKHBoX3VudlssMV0pKSwKICAgICAgICAgICAgICAgICBwaG9uZW1lPXBoX3VudiRsYWJlbHMpCmR0PXRhYmxlKHJiaW5kKGRfdm9pLGRfdW52KSkKZHQKYGBgCgpBIG5hIGtvbmllYyBuYXJ5c3VqbXkgd3lrcmVzOgpgYGB7cn0KYmFycGxvdChkdCxsZWdlbmQ9cm93bmFtZXMoZHQpKQpgYGAKClRlbiBwcnp5a8WCYWQgbW/FvGUgaSBuaWUgamVzdCBpZGVhbG55LCBibyBuaWUgd3lrb3J6eXN0dWplIMW8YWRuZSB3eWxpY3pvbmUgY2VjaHksIHR5bGtvIHBvbGVnYSBuYSBpbmZvcm1hY2ppIHd5d25pb3Nrb3dhbmVqIHByemV6IHN5c3RlbSBhdXRvbWF0eWN6bmVnbyByb3pwb3puYXdhbmlhIG1vd3kuIFN5c3RlbSB0ZW4gcG96d2FsYSBuYSBwb2R3w7NqbsSFIHRyYW5za3J5cGNqxJkgKHphcsOzd25vICp2KiBqYWsgaSAqZiopIGkgdcW8eXdhIG1vZGVsdSBha3VzdHljem5lZ28gd3l0cmVub3dhbmVnbyBuYSB6YmlvcnplIGRhbnljaCDFvGVieSBkb3Bhc293YcSHIG5hamxlcGllaiBwYXN1asSFY8SFIHRyYW5za3J5cGNqxJkgZG8gbmFncmFuaWEuIE5pZW1uaWVqIGplZG5haywgd2lkYcSHIMW8ZSBkbGEgd2nEmWtzem/Fm2NpIHByenlwYWRrw7N3LCBwcm9jZXMgdGVuIGR6aWHFgmE6IHd5cmF6ICoqdyoqIGplc3QgdWJlemTFundpxJljem5pYW55IHcgcHJ6eXBhZGt1IGplxZtsaSBwbyBuaW0gbmFzdMSZcHVqZSBnxYJvc2thIGTFundpxJljem5hIGkgbmEgb2R3csOzdC4KClcga2HFvGR5bSByYXppZSwgY2VsZW0gdGVnbyB6ZXN6eXR1IGJ5xYJvIHBva2F6YW5pZSB3IG1pYXLEmSBza29tcGxpa293YW5laiBzeXR1YWNqaSDFvHljemlvd2VqIGkga3dlcmVuZHkgcG90cnplYm5laiBkbyBqZWogenJlYWxpem93YW5pYS4gUG9rYXphbm8gdGXFvCBkd2EgZG9kYXRrb3dlIHBvbGVjZW5pYSwga3TDs3JlIHNpxJkgYmFyZHpvIHByenlkYWrEhSBkbyBkb3ByZWN5em93YW5pYSBwb3N6dWtpd2FuZWogaW5mb3JtYWNqaS4=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR8WCb3NraSBkxbp3acSZY3puZSBpIGJlemTFundpxJljem5lIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpKYWtvIHRyb2NoxJkgYmFyZHppZWogc2tvbXBsaWtvd2FueSBwcnp5a8WCYWQsIHpvYmFjem15IG5hc3TEmXB1asSFY8SFIGhpcG90ZXrEmToKd3lyYXogKip3KiogdWxlZ25pZSB1YmV6ZMW6d2nEmWN6bmllbml1LCBqZcWbbGkgcG8gbmltIG5hc3TEmXB1amUgd3lyYXogemFjenluYWrEhWN5IHNpxJkgb2QgZ8WCb3NraSBiZXpkxbp3acSZY3puZWogaSBhbmFsb2dpY3puaWUgcG96b3N0YW5pZSBkxbp3acSZY3pueSB3IHByenlwYWRrdSBnxYJvc2tpIGTFundpxJljem5lai4gTmEgcHJ6eWvFgmFkOgoKICAqIHcgZHJ1xbx5bmllIC0gKip3KiogamVzdCBkxbp3acSZY3puZSAoY3p5bGkgKnYqKQogICogdyBzYW1vY2hvZHppZSAtICoqdyoqIGplc3QgYmV6ZMW6d2nEmWN6bmUgKGN6eWxpICpmKikKICAKV2N6eXRham15IG5hc3rEhSBiYXrEmToKYGBge3J9CmxpYnJhcnkoZW11UikKZGIgPC0gbG9hZF9lbXVEQignY2xhcmluJywgdmVyYm9zZSA9IEZBTFNFKQpgYGAKClpvYmFjem15LCBpbGUgamVzdCB3IG9nw7NsZSB3eXJhesOzdyAqKncqKiB3IGtvcnB1c2llOgpgYGB7cn0Kc2Vnc19hbGwgPC0gcXVlcnkoZGIsJ1tXb3JkID09IHddJykKYGBgCgpaIHR5Y2ggMjMwIHByenlrxYJhZMOzdyB6csOzYm15IHBvZHppYcWCIG5hIHRha2llLCBwbyBrdMOzcnljaCBuYXN0xJlwdWrEhSBnxYJvc2tpIGTFundpxJljem5lIGkgYmV6ZMW6d2nEmWN6bmU6CmBgYHtyfQpzZWdzX3VudiA8LSBxdWVyeShkYiwnW1dvcmQgPT0gdyAtPiBbV29yZCA9fiAuKiBeIFtQaG9uZW1lID09IHQgfCBwIHwgcyB8IFMgfCB0UyB8IHRzaSB8IHNpIHwgZiB8IHggfCBrIHwgdHMgJiBTdGFydChXb3JkLFBob25lbWUpPT0xXV1dJykKc2Vnc192b2kgPC0gcXVlcnkoZGIsJ1tXb3JkID09IHcgLT4gW1dvcmQgPX4gLiogXiBbUGhvbmVtZSAhPSB0IHwgcCB8IHMgfCBTIHwgdFMgfCB0c2kgfCBzaSB8IGYgfCB4IHwgayB8IHRzICYgU3RhcnQoV29yZCxQaG9uZW1lKT09MV1dXScpCmBgYAoKS3dlcmVuZGEgdGEgamVzdCB0cm9jaMSZIGJhcmR6aWVqIHNrb21wbGlrb3dhbmEsIHdpxJljIHJvemJpam15IGrEhSBuYSBwb3NjemVnw7NsbmUgY3rEmcWbY2k6CgogICogc3p1a2FteSB3eXJhenUgKip3KioKICAqIHBvIHR5bSB3eXJhemllICh6bmFrIGAtPmAgb3puYWN6YSBuYXN0xJlwc3R3bykgd3lzdMSZcHVqZSB0bywgY28gdyBuYXdpYXNpZSBrd2FkcmF0b3d5bQogICogbW/FvGUgdG8gYnnEhyBkb3dvbG55IHd5cmF6ICh6bmFrIGAuKmAgb3puYWN6YSBkb3dvbG7EhSBzZWt3ZW5jasSZIHpuYWvDs3cgLSBqZcWbbGkgdcW8eXdhbXkgd3lyYcW8ZcWEIHJlZ3VsYXJueWNoLCBtdXNpbXkgdGXFvCBzdG9zb3dhxIcgc3ltb2JsIGA9fmAgemFtaWFzdCBwcm9zdGVqIHLDs3dub8WbY2kpCiAgKiB3IGlubnltIHBvemlvbWllIHRlZ28gd3lyYXp1IG11c2kgd3lzdMSZcG93YcSHIGZvbmVtIHogbGlzdHkKICAqIGZvbmVtIHRlbiBtdXNpIGJ5xIcgbmEgcGllcndzenltIG1pZWpzY3UgdyB3eXJhemllCiAgCldpZGHEhywgxbxlIHR1dGFqIHpub3d1IG1hbXkgc3pjesSZxZtjaWUgaSBsaWN6bm/Fm8SHIG9ieWR3dSBncnVwIHNlZ21lbnTDs3cgamVzdCBtbmllaiB3acSZY2VqIHLDs3duYToKYGBge3J9Cmxlbmd0aChzZWdzX3ZvaVssMV0pCmxlbmd0aChzZWdzX3VudlssMV0pCmBgYAoKSmFrIHNwb2pyenlteSBuYSB6YXdhcnRvxZvEhyBqZWRuZWdvIHogdHljaCBzZWdtZW50w7N3LCB6b2JhY3p5bXksIMW8ZSBvcGlzIGthxbxkZWdvIHphd2llcmEgemFyw7N3bm8gd3lyYXogKip3KiosIGphayBpIHRvLCBjbyBuYXN0xJlwdWplIHBvIG5pbTogCmBgYHtyfQpzZWdzX3VudiRsYWJlbHNbMToxMF0KYGBgCgpNb8W8ZW15IHXFvHnEhyBuYXN0xJlwdWrEhWNlZ28gcG9sZWNlbmlhLCDFvGVieSB3eWJyYcSHIHR5bGtvIHRlIGN6xJnFm2NpIHNlZ21lbnTDs3cgbmFsZcW8xIVjZSBkbyB3eXJhenUgKip3Kio6CmBgYHtyfQp3X3Vudj1yZXF1ZXJ5X3NlcShkYixzZWdzX3VudikKd192b2k9cmVxdWVyeV9zZXEoZGIsc2Vnc192b2kpCmBgYAoKTmFzdMSZcG5pZSwgdcW8eWpteSBwb25pxbxzemVnbyBwb2xlY2VuaWEsIMW8ZWJ5IG9kY3p5dGHEhyBhbm5vdGFjasSZIHd5cmF6dSBuYSBwb3ppb21pZSBmb25lbcOzdywgemFtaWFzdCB3eXJhenU6CmBgYHtyfQpwaF91bnY9cmVxdWVyeV9oaWVyKGRiLHdfdW52LCdQaG9uZW1lJykKcGhfdm9pPXJlcXVlcnlfaGllcihkYix3X3ZvaSwnUGhvbmVtZScpCmBgYAoKWnLDs2JteSB0ZXJheiB0YWJlbMSZIHBvZHN1bW93dWrEhWPEhToKYGBge3J9CmRfdm9pPWRhdGEuZnJhbWUodm9pY25lc3M9cmVwKCdExbp3LicsbGVuZ3RoKHBoX3ZvaVssMV0pKSwKICAgICAgICAgICAgICAgICBwaG9uZW1lPXBoX3ZvaSRsYWJlbHMpCmRfdW52PWRhdGEuZnJhbWUodm9pY25lc3M9cmVwKCdCZXpkxbouJyxsZW5ndGgocGhfdW52WywxXSkpLAogICAgICAgICAgICAgICAgIHBob25lbWU9cGhfdW52JGxhYmVscykKZHQ9dGFibGUocmJpbmQoZF92b2ksZF91bnYpKQpkdApgYGAKCkEgbmEga29uaWVjIG5hcnlzdWpteSB3eWtyZXM6CmBgYHtyfQpiYXJwbG90KGR0LGxlZ2VuZD1yb3duYW1lcyhkdCkpCmBgYAoKVGVuIHByenlrxYJhZCBtb8W8ZSBpIG5pZSBqZXN0IGlkZWFsbnksIGJvIG5pZSB3eWtvcnp5c3R1amUgxbxhZG55Y2ggd3lsaWN6b255Y2ggY2VjaCwgdHlsa28gcG9sZWdhIG5hIGluZm9ybWFjamkgd3l3bmlvc2tvd2FuZWogcHJ6ZXogc3lzdGVtIGF1dG9tYXR5Y3puZWdvIHJvenBvem5hd2FuaWEgbW93eS4gU3lzdGVtIHRlbiBwb3p3YWxhIG5hIHBvZHfDs2puxIUgdHJhbnNrcnlwY2rEmSAoemFyw7N3bm8gKnYqIGphayBpICpmKikgaSB1xbx5d2EgbW9kZWx1IGFrdXN0eWN6bmVnbywgd3l0cmVub3dhbmVnbyBuYSB6YmlvcnplIGRhbnljaCwgxbxlYnkgem5hbGXFusSHIG5hamxlcGllaiBwYXN1asSFY8SFIHRyYW5za3J5cGNqxJkgZG8gbmFncmFuaWEuIE5pZW1uaWVqIGplZG5hayB3aWRhxIcsIMW8ZSBkbGEgd2nEmWtzem/Fm2NpIHByenlwYWRrw7N3LCBwcm9jZXMgdGVuIGR6aWHFgmE6IHd5cmF6ICoqdyoqIGplc3QgdWJlemTFundpxJljem5pYW55LCBqZcWbbGkgcG8gbmltIG5hc3TEmXB1amUgZ8WCb3NrYSBkxbp3acSZY3puYSBpIG5hIG9kd3LDs3QuCgpXIGthxbxkeW0gcmF6aWUgY2VsZW0gdGVnbyB6ZXN6eXR1IGJ5xYJvIHBva2F6YW5pZSB3IG1pYXLEmSBza29tcGxpa293YW5laiBzeXR1YWNqaSDFvHljaW93ZWogaSBrd2VyZW5keSBwb3RyemVibmVqIGRvIGplaiB6cmVhbGl6b3dhbmlhLiBQb2themFubyB0ZcW8IGR3YSBkb2RhdGtvd2UgcG9sZWNlbmlhLCBrdMOzcmUgc2nEmSBiYXJkem8gcHJ6eWRhasSFIGRvIGRvcHJlY3l6b3dhbmlhIHBvc3p1a2l3YW5laiBpbmZvcm1hY2ppLg==</div>
 
 
 
