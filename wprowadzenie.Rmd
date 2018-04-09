@@ -47,7 +47,7 @@ Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chw
 
 # Niezbędne dane
 
-Na warsztatach będziemy korzystać z danych będących podzbiorem korpusu Clarin-PL (10 kolejnych sesji, od #100 do #109), które można ściągnąć z [tego](https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc) linku. Ściągnij ten plik i rozpakuj w jakimś katalogu (np. na Pulpicie), ale zapisz gdzieś ścieżkę do rozpakowanego katalogu (będzie potrzebna podczas warsztatów). Katalog zajmuje ok. 227 MB po rozpakowaniu.
+Na warsztatach będziemy korzystać z danych będących podzbiorem korpusu Clarin-PL (10 kolejnych sesji, od #100 do #109), które można ściągnąć z [tego](https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc) linku (kliknij na przycisk "Download" w górnym prawym rogu strony). Ściągnij ten plik i rozpakuj w jakimś katalogu (np. na Pulpicie), ale zapisz gdzieś ścieżkę do rozpakowanego katalogu (będzie potrzebna podczas warsztatów). Katalog zajmuje ok. 227 MB po rozpakowaniu.
 
 Jeśli nie jesteś pewien/pewna jak poprawnie odczytać pełną ścieżkę rozpakowanego katalogu, poproś o pomoc kogoś z prowadzących warsztaty.
 
