@@ -1,0 +1,61 @@
+---
+title: "Wprowadzenie do warsztatów"
+output: html_document
+---
+
+Dokument ten pomoże w instalacji środowiska w celu przeprowadzenia kolejnych ćwiczeń zawartych na poniższej stronie.
+
+# Język R
+
+Do uczestnictwa w warsztatach dotyczących zasobów mowy, będzie potrzebne środowisko do programowania w języku R. 
+
+Wszystkim uczestnikom proponujemy ściągnięcie i zainstalowanie środowiska R na własnym komputerze. Środowisko to zwykle składa się z dwóch części:
+
+1. zestawu aplikacji (konsolowych) i bibliotek należących do samego języka
+2. aplikacji graficznej (GUI) znacznie ułatwiającej korzystanie z programów z pkt 1.
+
+
+## Instalacja podstawowych programów i bibliotek
+
+Należy wejść na stronę https://cran.r-project.org/ i śledzić instrukcje podane na tej stronie:
+
+* użytkownicy Windowsa wybierają opcję *base* i ściągają instalator _R 3.4.4 for Windows_
+* użytkownicy Mac OS X ściągają _R-3.4.4.pkg_ i uruchamiają ten instalator
+* użytkownicy Linuxa powinni korzystać z wbudowanego mechanizmu instalacji pakietów właściwego dla własnej dystrybucji (np. `apt install r-base` albo `yum install r-base`)
+
+## Instalacja interfejsu graficznego
+
+Na warsztatach polecamy korzystanie ze wspaniałego środowiska o nazwie R-Studio. Nie jest ono niezbędne do wykonania ćwiczeń, ale bardzo ułatwi pracę z językiem R. Program ten można zainstalować ściągając odpowiedni dla swojego systemu instalator ze strony [tutaj](https://www.rstudio.com/products/rstudio/download/).
+
+## Rozwiązanie awaryjne
+
+Jeśli powyższe dwa kroki zawiodą, istnieje jeszcze jedna alternatywna metoda uczestnictwa w warsztatach. Dla ograniczonej ilości uczestników możemy udostępnić podobne środowisko poprzez stronę WWW. Jeśli nie jesteś w stanie zainstalować programu na swoim komputerze, zgłoś się do prowadzącego o dostęp do języka R przez stronę WWW.
+
+# Potrzebne pakiety
+
+Na warsztatach będziemy korzystać z dwóch niestandardowych pakietów:
+
+* *emuR* - pakiet do obsługi korpusu
+* *phonR* - pakiet do rysowania wykresów rozkładów formantów
+
+W języku R dowolny pakiet instalujemy poleceniem:
+
+* `install.pakacages("NAZWA_PAKIETU")`
+* albo wybierając opcję Install Packages... z menu Tools w aplikacji R-Studio.
+
+Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać).
+
+# Niezbędne dane
+
+Na warsztatach będziemy korzystać z danych będących podzbiorem korpusu Clarin-PL (10 kolejnych sesji, od #100 do #109), które można ściągnąć z [tego](https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc) linku. Ściągnij ten plik i rozpakuj w jakimś katalogu (np. na Pulpicie), ale zapisz gdzieś ścieżkę do rozpakowanego katalogu (będzie potrzebna podczas warsztatów). Katalog zajmuje ok. 227 MB po rozpakowaniu.
+
+Jeśli nie jesteś pewien/pewna jak poprawnie odczytać pełną ścieżkę rozpakowanego katalogu, poproś o pomoc kogoś z prowadzących warsztaty.
+
+# Podsumowanie
+
+Przed rozpoczęciem warsztatów, warto sprawdzić następujące rzeczy:
+
+1. mamy zainstalowany program R
+2. mamy zainstalowany RStudio (bardzo zalecane)
+3. mamy zainstalowane pakiety *emuR* i *phonR*
+4. mamy ściągnięty i rozpakowany plik z nagraniami (clarin.zip)
