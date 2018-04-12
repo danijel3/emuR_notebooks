@@ -40,7 +40,7 @@ Na warsztatach będziemy korzystać z dwóch niestandardowych pakietów:
 
 W języku R dowolny pakiet instalujemy poleceniem:
 
-* `install.pakacages("NAZWA_PAKIETU")`
+* `install.packages("NAZWA_PAKIETU")`
 * albo wybierając opcję Install Packages... z menu Tools w aplikacji R-Studio.
 
 Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać).
