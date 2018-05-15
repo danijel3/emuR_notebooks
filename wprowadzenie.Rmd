@@ -29,7 +29,7 @@ Na warsztatach polecamy korzystanie ze wspaniałego środowiska o nazwie R-Studi
 
 ## Rozwiązanie awaryjne
 
-Jeśli powyższe dwa kroki zawiodą, istnieje jeszcze jedna alternatywna metoda uczestnictwa w warsztatach. Dla ograniczonej ilości uczestników możemy udostępnić podobne środowisko poprzez stronę WWW. Jeśli nie jesteś w stanie zainstalować programu na swoim komputerze, zgłoś się do prowadzącego o dostęp do języka R przez stronę WWW.
+Jeśli powyższe dwa kroki zawiodą, istnieje jeszcze jedna alternatywna metoda uczestnictwa w warsztatach. Dla ograniczonej ilości uczestników możemy udostępnić podobne środowisko poprzez stronę WWW. Jeśli nie jesteś w stanie zainstalować programu na swoim komputerze, zgłoś się do prowadzącego o dostęp do języka R przez stronę WWW: http://r.clarin-pl.eu
 
 # Potrzebne pakiety
 
@@ -47,7 +47,7 @@ Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chw
 
 # Niezbędne dane
 
-Na warsztatach będziemy korzystać z danych będących podzbiorem korpusu Clarin-PL (10 kolejnych sesji, od #100 do #109), które można ściągnąć z [tego](https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc) linku (kliknij na przycisk "Download" w górnym prawym rogu strony). Ściągnij ten plik i rozpakuj w jakimś katalogu (np. na Pulpicie), ale zapisz gdzieś ścieżkę do rozpakowanego katalogu (będzie potrzebna podczas warsztatów). Katalog zajmuje ok. 227 MB po rozpakowaniu.
+Na warsztatach będziemy korzystać z danych będących podzbiorem korpusu Clarin-PL (10 kolejnych sesji, od #100 do #109), które można ściągnąć z [tego](http://mowa.clarin-pl.eu/korpusy/clarin-small.zip) linku (kliknij na przycisk "Download" w górnym prawym rogu strony). Ściągnij ten plik i rozpakuj w jakimś katalogu (np. na Pulpicie), ale zapisz gdzieś ścieżkę do rozpakowanego katalogu (będzie potrzebna podczas warsztatów). Katalog zajmuje ok. 227 MB po rozpakowaniu.
 
 Jeśli nie jesteś pewien/pewna jak poprawnie odczytać pełną ścieżkę rozpakowanego katalogu, poproś o pomoc kogoś z prowadzących warsztaty.
 
