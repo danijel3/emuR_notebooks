@@ -90,6 +90,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -135,8 +138,8 @@ $(document).ready(function () {
 <h2>Instalacja podstawowych programów i bibliotek</h2>
 <p>Należy wejść na stronę <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> i śledzić instrukcje podane na tej stronie:</p>
 <ul>
-<li>użytkownicy Windowsa wybierają opcję <em>base</em> i ściągają instalator <em>R 3.4.4 for Windows</em></li>
-<li>użytkownicy Mac OS X ściągają <em>R-3.4.4.pkg</em> i uruchamiają ten instalator</li>
+<li>użytkownicy Windowsa wybierają opcję <em>base</em> i ściągają instalator <em>R X.X.X for Windows</em></li>
+<li>użytkownicy Mac OS X ściągają <em>R-X.x.X.pkg</em> i uruchamiają ten instalator</li>
 <li>użytkownicy Linuxa powinni korzystać z wbudowanego mechanizmu instalacji pakietów właściwego dla własnej dystrybucji (np. <code>apt install r-base</code> albo <code>yum install r-base</code>)</li>
 </ul>
 </div>
@@ -161,7 +164,7 @@ $(document).ready(function () {
 <li><code>install.packages(&quot;NAZWA_PAKIETU&quot;)</code></li>
 <li>albo wybierając opcję Install Packages… z menu Tools w aplikacji R-Studio.</li>
 </ul>
-<p>Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać).</p>
+<p>Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać): <code>install.packages(c('emuR','phonR'))</code></p>
 </div>
 <div id="niezbedne-dane" class="section level1">
 <h1>Niezbędne dane</h1>

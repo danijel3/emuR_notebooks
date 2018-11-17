@@ -1,6 +1,8 @@
 ---
 title: "VSA i VAI"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 Ten zeszyt opisuje dwie miary oparte o położenia formantów F1/F2 samogłosek, mające odzwierciedlenie w praktycznych zastosowaniach opisanych w literaturze: **Vowel Space Area** (VSA), oraz **Vowel Articulation Index** (VAI). Ich opis i zastosowanie można przeczytać na przykład w pracy:
@@ -23,7 +25,7 @@ library(phonR)
 db <- load_emuDB('clarin', verbose = FALSE)
 segs <- query(db,'Phoneme=a|i|u')
 td <- get_trackdata(db,seglist = segs, ssffTrackName = 'Formants', cut=0.5,
-                 verbose = FALSE)
+                 consistentOutputType = FALSE, verbose = FALSE)
 ```
 
 Tak jak poprzednio wszystko co potrzebne przekopiujemy do osobnej tabelki i usuniemy z niej błędne wartości:

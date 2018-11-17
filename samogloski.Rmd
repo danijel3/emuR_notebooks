@@ -1,20 +1,11 @@
 ---
 title: "Samogłoski w emuR"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 Ten zeszyt służy jako wstęp do korzystania z biblioteki *emuR* do analizy korpusów mowy w języku R.
-
-Pracę zaczniemy od zainstalowania przydatnych bibliotek:
-  
-  * emuR - umożliwia wczytywanie i przeszukiwanie bazy danych zapisanej w formacie EMU
-  * wrassp - biblioteka do przetwarzania audio, służy do ekstrakcji cech
-  * phonR - wspaniała biblioteka do rysowania fonemów na płaszczyźnie
-  
-```{r}
-install.packages(c('emuR','wrassp','phonR'))
-```
-
 
 Zaczniemy od załadowania biblioteki emuR:
 ```{r}
@@ -23,7 +14,7 @@ library(emuR)
 
 
 Po ściągnięciu i rozpakowaniu archiwum z tego linku:
-https://drive.google.com/open?id=0B5ik5hH3HuCFVnFZSWZyLWoxSWc
+http://mowa.clarin-pl.eu/korpusy/clarin-small.zip
 
 Zakładając, że jesteśmy w katalogu, gdzie rozpakowano powyższe archiwum, możemy wczytać naszą bazę:
 ```{r}
@@ -74,10 +65,10 @@ Z powyższej tabelki można wyczytać dużo ciekawych informacji i pisać własn
 
 Czasami baza danych zawiera już przetworzone dane (tak jak w tym przypadku), ale czasami trzeba użyć biblioteki *wrassp* do przeliczenia informacji z korpusu. W każdym przypadku używamy poniższego polecenia.
 
-Następujące polecenie wylicza (wczytuje z dysku) formanty dla wszystkich segmentów. Argument `cut` jest kolejnym udogodnieniem, gdyż dla każdego segmentu zwraca tylko jedną wartość, znajdującą się dokładnie pośrodku każdego segmentu:
+Następujące polecenie wylicza (wczytuje z dysku) formanty dla wszystkich segmentów. Argument `cut` jest kolejnym udogodnieniem, gdyż dla każdego segmentu zwraca tylko jedną wartość, znajdującą się dokładnie pośrodku każdego segmentu. Argument `consistentOutputType` jest potrzebny do ułatwienia pracy z wynikową tabelką jaką zwraca to polecenie:
 ```{r}
 td <- get_trackdata(db, seglist = segs, ssffTrackName = 'Formants', cut=0.5,
-                    verbose = FALSE)
+                    consistentOutputType = FALSE,  verbose = FALSE)
 td
 ```
 

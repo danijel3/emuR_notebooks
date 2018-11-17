@@ -1,6 +1,8 @@
 ---
 title: "F0 w emuR"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 Poprzedni zeszyt pokazał podstawy pracy z biblioteką **emuR**, ale posiada ona o wiele więcej funkcjonalności. Podstawowym celem biblioteki jest zaoszczędzenie czasu osobom pracującycm z korpusami. Idea pracy z nią polega na szybkim testowaniu pomsyłów i hipotez.
@@ -28,17 +30,16 @@ seg_F <- emuR::query(db,"[Phoneme==a ^ Gender==F]")
 seg_M <- emuR::query(db,"[Phoneme==a ^ Gender==M]")
 ```
 
-Powyższe polecenie szuka wszystkich wystąpień fonemu *a* w korpusie 10 osób, ale w taki sposób, żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można przeczytać wpisując polecenie:
-```{r}
-vignette('EQL')
-```
+Powyższe polecenie szuka wszystkich wystąpień fonemu *a* w korpusie 10 osób, ale w taki sposób, żeby w poziomie wyższym, czyli zdaniu, annotacja płci była odpowiednio M lub F. Dokładny opis języka zapytań można znaleźć tutaj:
+
+https://ips-lmu.github.io/The-EMU-SDMS-Manual/
 
 Na szczęście ilość segmentów, zarówno jednych, jak i drugich, jest w miarę podobna, więc będzie można użyć prostych miar statystycznych do ich porównania.
 
 Wyliczmy najpierw F0 dla poszczególnych segmetnów:
 ```{r}
-td_F <- get_trackdata(db, seg_F,"Pitch", cut=0.5, verbose = FALSE)
-td_M <- get_trackdata(db, seg_M,"Pitch", cut=0.5, verbose = FALSE)
+td_F <- get_trackdata(db, seg_F,"Pitch", cut=0.5, consistentOutputType = FALSE,  verbose = FALSE)
+td_M <- get_trackdata(db, seg_M,"Pitch", cut=0.5, consistentOutputType = FALSE,  verbose = FALSE)
 ```
 
 Teraz możemy użyć wykresu pudełkowego, aby porównać te dwie populacje ze sobą:

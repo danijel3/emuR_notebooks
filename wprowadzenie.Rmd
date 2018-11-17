@@ -19,8 +19,8 @@ Wszystkim uczestnikom proponujemy ściągnięcie i zainstalowanie środowiska R 
 
 Należy wejść na stronę https://cran.r-project.org/ i śledzić instrukcje podane na tej stronie:
 
-* użytkownicy Windowsa wybierają opcję *base* i ściągają instalator _R 3.4.4 for Windows_
-* użytkownicy Mac OS X ściągają _R-3.4.4.pkg_ i uruchamiają ten instalator
+* użytkownicy Windowsa wybierają opcję *base* i ściągają instalator _R X.X.X for Windows_
+* użytkownicy Mac OS X ściągają _R-X.x.X.pkg_ i uruchamiają ten instalator
 * użytkownicy Linuxa powinni korzystać z wbudowanego mechanizmu instalacji pakietów właściwego dla własnej dystrybucji (np. `apt install r-base` albo `yum install r-base`)
 
 ## Instalacja interfejsu graficznego
@@ -43,7 +43,10 @@ W języku R dowolny pakiet instalujemy poleceniem:
 * `install.packages("NAZWA_PAKIETU")`
 * albo wybierając opcję Install Packages... z menu Tools w aplikacji R-Studio.
 
-Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać).
+Zainstaluj obydwa z powyższych pakietów w swojej wersji programu (może to chwilę potrwać):
+`install.packages(c('emuR','phonR'))`
+
+
 
 # Niezbędne dane
 
