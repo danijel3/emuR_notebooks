@@ -24,7 +24,7 @@ library(phonR)
 
 db <- load_emuDB('clarin', verbose = FALSE)
 segs <- query(db,'Phoneme=a|i|u')
-td <- get_trackdata(db,seglist = segs, ssffTrackName = 'Formants', cut=0.5,
+td <- get_trackdata(db,seglist = segs, ssffTrackName = 'Formants', cut=0.5, resultType = 'trackdata',
                  consistentOutputType = FALSE, verbose = FALSE)
 ```
 
@@ -65,7 +65,7 @@ Podczas nagrywania korpusu, czasami ta sama osoba była nagrywana podwójnie. W 
 
 Musimy zatem sami ręcznie najpierw wyliczyć średnie F1 i F2 dla poszczególnych mówców i ich samogłosek:
 ```{r}
-da <- dt %>% group_by(speaker,phoneme) %>% summarise_at(vars(F1,F2), funs(mean(.)))
+da <- dt %>% group_by(speaker,phoneme) %>% summarise_at(vars(F1,F2), mean)
 ```
 
 A potem w funkcji wyciągniemy poszczególne wartości i zastosujemy je we wzorze:

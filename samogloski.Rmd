@@ -43,7 +43,7 @@ list_levelDefinitions(db)
 
 Możemy też uruchomić specjalny intefejs webowy do przeglądania i edycji całej bazy:
 ```{r}
-serve(db)
+#serve(db)
 ```
 
 
@@ -67,7 +67,7 @@ Czasami baza danych zawiera już przetworzone dane (tak jak w tym przypadku), al
 
 Następujące polecenie wylicza (wczytuje z dysku) formanty dla wszystkich segmentów. Argument `cut` jest kolejnym udogodnieniem, gdyż dla każdego segmentu zwraca tylko jedną wartość, znajdującą się dokładnie pośrodku każdego segmentu. Argument `consistentOutputType` jest potrzebny do ułatwienia pracy z wynikową tabelką jaką zwraca to polecenie:
 ```{r}
-td <- get_trackdata(db, seglist = segs, ssffTrackName = 'Formants', cut=0.5,
+td <- get_trackdata(db, seglist = segs, ssffTrackName = 'Formants', cut=0.5, resultType = 'trackdata',
                     consistentOutputType = FALSE,  verbose = FALSE)
 td
 ```
