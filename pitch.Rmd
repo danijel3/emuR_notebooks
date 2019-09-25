@@ -38,8 +38,8 @@ Na szczęście ilość segmentów, zarówno jednych, jak i drugich, jest w miar�
 
 Wyliczmy najpierw F0 dla poszczególnych segmetnów:
 ```{r}
-td_F <- get_trackdata(db, seg_F,"Pitch", cut=0.5, consistentOutputType = FALSE,  verbose = FALSE)
-td_M <- get_trackdata(db, seg_M,"Pitch", cut=0.5, consistentOutputType = FALSE,  verbose = FALSE)
+td_F <- get_trackdata(db, seg_F,"Pitch", cut=0.5, resultType = 'trackdata', consistentOutputType = FALSE, verbose = FALSE)
+td_M <- get_trackdata(db, seg_M,"Pitch", cut=0.5, resultType = 'trackdata', consistentOutputType = FALSE, verbose = FALSE)
 ```
 
 Teraz możemy użyć wykresu pudełkowego, aby porównać te dwie populacje ze sobą:
